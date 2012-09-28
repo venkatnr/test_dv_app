@@ -1,0 +1,35 @@
+
+
+<html>
+<head>
+</head>
+<body>
+<center>
+<h2> BACKLOGS </h2>
+</center>
+<hr/>
+<table>
+<tr>
+	<th>Task Name </th>
+</tr>
+<hr/>
+<%= form_tag (assign_backlogs_path) do %>
+<% @tasks = Task.find(:all) %>
+<% @tasks.each do |task| %>
+		<tr>
+               <% if task.story_id == 989 %>
+		<td><%= check_box_tag "tasks[]", task.id %></td>
+		<td><b><%= task.name %></b></td>
+		</tr>
+		<% end %>
+   <% end %>
+
+</table>
+<h3> Select iteration which you need to select </h3>
+<%= select_tag :name,  options_for_select(Iteration.find(:all).collect{|p|[p.name]}) %>
+<%= submit_tag "Done" %>
+<% end %>
+
+
+</body>
+</html>

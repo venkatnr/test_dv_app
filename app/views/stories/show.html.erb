@@ -1,0 +1,81 @@
+<html>
+<h2><%= link_to @project.name, project_path(@project)%> >> <%= link_to @iteration.name,  project_iteration_path(@project.id, @iteration.id, @story.id )%> >> <%= @story.name %></h2>
+<table>
+<tr>
+
+<td>
+Name:
+</td>
+<td>
+<%= @story.name %>
+</td>
+</tr>
+<tr>
+
+<td>
+Type:
+</td>
+<td>
+<%= @story.Type %>
+</td>
+</tr>
+<tr>
+<td>
+description
+</td>
+<td>
+<%= @story.disposition%>
+</td>
+</tr>
+<tr>
+<td>
+customer
+</td>
+<td>
+<%= @story.customer %>
+</td>
+</tr>
+<tr>
+<td>
+tracker
+</td>
+<td>
+<%= @story.tracker %>
+</td>
+</tr>
+<tr>
+<td>
+status
+</td>
+<td>
+<%= @story.status %>
+</td>
+</tr>
+<tr>
+<td>
+priority
+</td>
+<td>
+<%= @story.priority %>
+</td>
+</tr>
+<tr>
+<td>
+order
+</td>
+<td>
+<%= @story.order %>
+</td>
+</tr>
+<tr>
+<td>
+Estimated_hours
+</td>
+<td>
+<%= @story.Estimated_hours %>
+</td>
+</tr>
+</table>
+
+<%= link_to "tasks list",  project_iteration_story_tasks_path(@project.id,@iteration.id, @story.id )%>
+</html>

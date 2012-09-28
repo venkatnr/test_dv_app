@@ -1,0 +1,111 @@
+<html>
+
+<% @flag = 0 %>
+
+<p> New Iteration for project -> <b><%= @project.name %></b> </p>
+<div id ="new_look">
+<table >
+
+<%= form_for([@project, @project.iteration.build]) do |f| %>
+ <tr>
+    <td id="tdleft"><%= f.label :name %></td>
+    <td><%= f.text_field :name %></td>
+ </tr>
+  <tr>
+	 <td id="tdleft"><%= f.label :iterationtype %></td>	  
+     <td><%= f.select(:iterationtype, options_for_select(["Weekly", "Monthly", "BIO-Monthly"])) %>
+  </td>
+ </tr>
+  <tr>
+	 <td id="tdleft"><%= f.label :Start_date %></td>
+     <td><%= f.text_field :start_date, :id => :popupDatepicker , :onmouseout=> "myFunction()"%></td>
+    </tr>
+  <tr>
+	  
+    <td id="tdleft"><%= f.label :End_date %></td>
+   
+   <td> <%= f.text_field :end_date, :id => :popupDatepicker1 %></td>
+  </tr>
+  <tr>
+    <td id="tdleft"><%= f.label :Status %></td>
+   <td><%= f.select(:status, options_for_select(["Planned","Open"])) %></td>
+   </tr>
+<tr><td id="tdleft">
+    <%= f.label :Description %></td>
+    <td>    <%= f.text_area :description%></td>
+   </tr></div>
+  <tr><td>
+    <%= f.submit %></td></tr>
+  
+<% end %>
+ </table>
+
+</html>
+<script>
+$("#popupDatepicker").glDatePicker(
+{
+onChange: function(target, newDate)
+{
+target.val
+(
+	newDate.getFullYear() + "-" +
+	(newDate.getMonth() + 1) + "-" +
+	newDate.getDate()
+);
+}
+});
+$("#popupDatepicker1").glDatePicker(
+{
+onChange: function(target, newDate)
+{
+target.val
+(
+	newDate.getFullYear() + "-" +
+	(	newDate.getMonth() + 1) + "-" +
+	newDate.getDate()
+);
+}
+});
+</script>
+<script>
+ function myFunction()
+ {
+var current_ele = $("#iteration_iterationtype").val();
+if(current_ele == "Weekly")
+{	
+	var st_date = $("#popupDatepicker").val();
+	var date1 = Date.parse(st_date);
+	date1.setDate(date1.getDate() + 7);
+	var testda = date1.toString("yyyy-MM-dd");
+	$("#popupDatepicker1").val(testda);
+}else
+if(current_ele == "Monthly")
+{
+	var st_date = $("#popupDatepicker").val();
+	var date1 = Date.parse(st_date);
+	date1.setDate(date1.getDate() + 30);
+	var testda = date1.toString("yyyy-MM-dd");
+	$("#popupDatepicker1").val(testda);
+}
+else
+{
+	var st_date = $("#popupDatepicker").val();
+	var date1 = Date.parse(st_date);
+	date1.setDate(date1.getDate() + 15);
+	var testda = date1.toString("yyyy-MM-dd");
+	$("#popupDatepicker1").val(testda);
+}
+ }
+</script>
+<style>
+	#new_look{background: #F5FCFC;  border-radius: 5px 5px 5px 5px;
+    margin-left: 50px;
+    max-width: 65%;}
+    #tdleft{float: right; top: 9px; position: relative;}
+    textarea {
+    resize: none;
+    cols: 20;
+    rows: 40;
+    width: 462px; height: 214px;
+    }
+	</style>
