@@ -1,5 +1,7 @@
 <h2><%=l(:label_issue_new)%></h2>
-
+<% if  @project.iteration == []%>
+<span><b><center>No iterations in this project to create issue</center></b></span>
+<% else %>
 <%= call_hook(:view_issues_new_top, {:issue => @issue}) %>
 
 <%= labelled_form_for @issue, :url => project_issues_path(@project),
@@ -52,4 +54,5 @@
 <% content_for :header_tags do %>
     <%= stylesheet_link_tag 'scm' %>
     <%= robot_exclusion_tag %>
+<% end %>
 <% end %>

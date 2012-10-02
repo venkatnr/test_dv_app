@@ -151,26 +151,16 @@ class IssuesController < ApplicationController
     if @issue.save
       call_hook(:controller_issues_new_after_save, { :params => params, :issue => @issue})
 	@project.iteration.each do | it | 
+	        if @issue.status_id == 2
 			if it.status == "Open"
-				
 				@issue.stories.create(:name => @issue.subject , :issue_id => @issue.id, :Estimated_hours => @issue.estimated_hours)
 				@it_id = Story.find(:all , :conditions => {:issue_id => @issue.id})
-                                
 				 @it_id.each do | it_one|
-			            it_one.update_attribute("iteration_id" , it.id)
-					
-					end 
-			elsif it.status == "Planned"
-				@issue.stories.create(:name => @issue.subject , :issue_id => @issue.id, :Estimated_hours => @issue.estimated_hours)
-				@it_id = Story.find(:all , :conditions => {:issue_id => @issue.id})
-                                
-				 @it_id.each do | it_one|
-			            it_one.update_attribute("iteration_id" , it.id)
-					
-					end 
-                          
-			end
-		end 
+			           		 it_one.update_attribute("iteration_id" , it.id)
+					     end 
+			end  
+		end
+	end 
 	
       respond_to do |format|
         format.html {
@@ -219,6 +209,21 @@ class IssuesController < ApplicationController
     end
 
     if saved
+     if @issue.status_id == 2 
+     @project_iteration = Iteration.find(:all, :conditions => {:project_id => @project.id})
+     @project_iteration.each do |it|
+		if it.status == "Open"
+	 	    @current_it = it.id
+		end
+	end
+     @story_name = Story.where(:issue_id => @issue.id)
+     @story_name.each do |st|
+ 	raise st.iteration_id.inspect
+     end 
+
+
+
+     end 
       render_attachment_warning_if_needed(@issue)
       flash[:notice] = l(:notice_successful_update) unless @issue.current_journal.new_record?
 

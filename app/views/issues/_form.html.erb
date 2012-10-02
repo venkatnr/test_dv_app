@@ -1,3 +1,4 @@
+
 <%= labelled_fields_for :issue, @issue do |f| %>
 <%= call_hook(:view_issues_form_details_top, { :issue => @issue, :form => f }) %>
 
@@ -46,3 +47,4 @@
 
 <%= call_hook(:view_issues_form_details_bottom, { :issue => @issue, :form => f }) %>
 <% end %>
+
