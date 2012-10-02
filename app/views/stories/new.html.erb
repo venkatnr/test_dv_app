@@ -1,3 +1,6 @@
+<script type="text/javascript" src="http://js.nicedit.com/nicEdit-latest.js"></script>
+
+
 <html>
 <p> New Userstory for Iteration -> <b><%= @iteration.name %></b> </p>
 <div id ="new_look">
@@ -39,7 +42,7 @@
 		<td><%= f.text_field :Estimated_hours %></td></tr>
 		<tr>
 		  <td id="tdleft"><%= f.label :description%></td>
-			<td><%= f.text_area :description %>
+			<td><%= f.text_area :description, :cols=>"61", :rows=>"15" %>
 		</td></tr>
 	  <tr>
 		<td><%= f.submit %></td></tr>
@@ -57,3 +60,8 @@
     width: 462px; height: 214px;
     }
 </style>
+
+
+<script type="text/javascript">
+       bkLib.onDomLoaded(function() { nicEditors.allTextAreas() });
+</script>

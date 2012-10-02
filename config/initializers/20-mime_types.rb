@@ -2,3 +2,5 @@
 
 Mime::SET << Mime::CSV unless Mime::SET.include?(Mime::CSV)
 
+Mime::Type.register "application/xls", :xls
+

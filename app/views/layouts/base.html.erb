@@ -51,7 +51,7 @@ body {behavior: url(<%= stylesheet_path "csshover.htc" %>);}
     </div>
     <% end %>
 
-    <h1><%= page_header_title %></h1>
+    <div class="page_title"><%= page_header_title %></div>
 
     <% if display_main_menu?(@project) %>
     <div id="main-menu">
@@ -114,12 +114,18 @@ body {behavior: url(<%= stylesheet_path "csshover.htc" %>);}
 }
 #loggedas
 {
+       color: #CCCCCC;
     float: right;
     position: relative;
-    right: 15px;
-    top: 117%;
-    color: #CCCCCC;
+    right: 96px;
+    top: 152%;
 }
  #sidebar:a:link, a:visited{color: #CCCCCC;}
-
+.page_title{color: #CCCCCC;
+    float: left;
+    font-size: 18px;
+    font-weight: bold;
+    left: 11%;
+    position: relative;
+    top: 166%;}
 </style>

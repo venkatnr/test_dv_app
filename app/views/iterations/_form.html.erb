@@ -1,3 +1,7 @@
+
+<script type="text/javascript" src="http://js.nicedit.com/nicEdit-latest.js"></script>
+
+
 <html>
 
 <% @flag = 0 %>
@@ -32,7 +36,7 @@
    </tr>
 <tr><td id="tdleft">
     <%= f.label :Description %></td>
-    <td>    <%= f.text_area :description%></td>
+    <td>    <%= f.text_area :description, :cols=>"50", :rows=>"15"%></td>
    </tr></div>
   <tr><td>
     <%= f.submit %></td></tr>
@@ -108,4 +112,10 @@ else
     rows: 40;
     width: 462px; height: 214px;
     }
-	</style>
+</style>
+
+
+<script type="text/javascript">
+       bkLib.onDomLoaded(function() { nicEditors.allTextAreas() });
+</script>
+

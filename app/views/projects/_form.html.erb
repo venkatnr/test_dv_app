@@ -1,3 +1,5 @@
+<script type="text/javascript" src="http://js.nicedit.com/nicEdit-latest.js"></script>
+
 <%= error_messages_for 'project' %>
 
 <div class="box tabular">
@@ -5,13 +7,13 @@
 <p><%= f.text_field :name, :required => true, :size => 60 %></p>
 <p><%= f.text_field :estimation_time, :required => true, :size => 60 %></p>
 
-<p><%= f.select(:typeofproject, options_for_select(["Client","Grouth", "Quality", "Vispertools"]), :required => true) %></p>
+<p><%= f.select(:typeofproject, options_for_select(["Client","Growth", "Quality", "Vispertools"]), :required => true) %></p>
 <% unless @project.allowed_parents.compact.empty? %>
     <p><%= label(:project, :parent_id, l(:field_parent)) %><%= parent_project_select_tag(@project) %></p>
 <% end %>
 
-<p><%= f.text_area :description, :rows => 5, :class => 'wiki-edit' %></p>
-<p><%= f.text_field :identifier, :required => true, :size => 60, :disabled => @project.identifier_frozen? %>
+<p><%= f.text_area :description, :cols=>"61", :rows=>"15"%></p>
+<p><%= f.text_field :identifier, :required => true, :size => 60%>
 <% unless @project.identifier_frozen? %>
   <em class="info"><%= l(:text_length_between, :min => 1, :max => Project::IDENTIFIER_MAX_LENGTH) %> <%= l(:text_project_identifier_info).html_safe %></em>
 <% end %></p>
@@ -64,3 +66,7 @@
 <% end %>
 <% end %>
 <!--[eoform:project]-->
+
+<script type="text/javascript">
+       bkLib.onDomLoaded(function() { nicEditors.allTextAreas() });
+</script>

@@ -7,7 +7,7 @@
 <h2><%=l(:label_overview)%></h2>
 <%= javascript_include_tag('RGraph.bar', 'RGraph.common.core')%>
 <body>
-<table border="1" width="800">
+<table border="1" width="800" class="test_border">
   <tr>
     <td >
 		<div class="contextual">
@@ -58,11 +58,11 @@
 		<%else%>
 			
 		<%end%>
-		<canvas id="venkat" width="250" height="150"></canvas>	
+		<canvas id="testgraph" width="250" height="150"></canvas>	
 		<script>
 			window.onload = function ()
 			{
-				var bar5 = new RGraph.Bar('venkat', [[<%=@project.estimation_time%>, <%= @final_story_estimation%>, <%= @count_tasks_estimation%>]]);
+				var bar5 = new RGraph.Bar('testgraph', [[<%=@project.estimation_time%>, <%= @final_story_estimation%>, <%= @count_tasks_estimation%>]]);
 				bar5.Set('chart.colors', ['#CC1111', '#11CCCC', '#1111CC']); 
 				bar5.Set('chart.labels', ['Project', 'UserStory', 'Task']);
 				bar5.Set('chart.strokestyle', 'transparent');
@@ -191,4 +191,7 @@
 			width: 190%;
 			background-color: #F5FCFC;
     }
+    .test_border{
+			width: 100%;
+		}
 	</style>

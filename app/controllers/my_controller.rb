@@ -228,6 +228,14 @@ def mytimesheet
 @start = params[:start_date]
 @end = params[:end_date]
 @user = User.current.lastname
+
+respond_to do |format|
+
+	      format.html
+
+	      format.xls 
+
+	    end
 end
 
 

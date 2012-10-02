@@ -1,5 +1,12 @@
+
+
+
 <html>
 <head>
+
+<%= stylesheet_link_tag( 'default')%>
+<%= javascript_include_tag('jquery.min', 'glDatePicker.min', 'date')%>
+
 </head>
 <body>
 <center>
@@ -7,8 +14,9 @@
 </center>
 <hr/>
 <%= form_tag( my_generate_reports_path, :method => :post) do %>	
-<b> From </b> <%= text_field_tag "start" %>
-<b> TO </b> <%= text_field_tag "end" %>
+<b> From </b> <%= text_field_tag "start", value = "", :id => :popupDatepicker %>
+
+<b> TO </b> <%= text_field_tag "end",  value = "", :id => :popupDatepicker1 %>
 
 <%= select_tag  "user",   options_for_select(User.find(:all, :conditions =>"lastname= Admin").collect{|p|[p.lastname]}), :id=>"selection" %>
 <%= select_tag "project", options_for_select(Project.find(:all).collect{|p|[p.name]}), :id=>"selection"  %>
@@ -21,4 +29,34 @@
 <%#= link_to "project", my_projectreport_path %><br/>
 <%#= link_to "user", my_userreport_path %>
 </body>
+
+<script>
+	$("#popupDatepicker").glDatePicker(
+	{
+		onChange: function(target, newDate)
+		{
+			target.val
+			(
+				newDate.getFullYear() + "-" +
+				(newDate.getMonth() + 1) + "-" +
+				newDate.getDate()
+			);
+		}
+	});
+	$("#popupDatepicker1").glDatePicker(
+	{
+		onChange: function(target, newDate)
+		{
+			target.val
+			(
+				newDate.getFullYear() + "-" +
+				(newDate.getMonth() + 1) + "-" +
+				newDate.getDate()
+			);
+		}
+	});
+</script>
+
 </html>
+
+

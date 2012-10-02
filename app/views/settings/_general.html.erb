@@ -1,9 +1,11 @@
+<script type="text/javascript" src="http://js.nicedit.com/nicEdit-latest.js"></script>
+
 <%= form_tag({:action => 'edit'}) do %>
 
 <div class="box tabular settings">
 <p><%= setting_text_field :app_title, :size => 30 %></p>
 
-<p><%= setting_text_area :welcome_text, :cols => 60, :rows => 5, :class => 'wiki-edit' %></p>
+<p><%= setting_text_area :welcome_text, :cols=>"5", :rows=>"5" %></p>
 <%= wikitoolbar_for 'settings_welcome_text' %>
 
 <p><%= setting_text_field :attachment_max_size, :size => 6 %> <%= l(:"number.human.storage_units.units.kb") %></p>
@@ -38,3 +40,7 @@
 
 <%= submit_tag l(:button_save) %>
 <% end %>
+
+<script type="text/javascript">
+       bkLib.onDomLoaded(function() { nicEditors.allTextAreas() });
+</script>
