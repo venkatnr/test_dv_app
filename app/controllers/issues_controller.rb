@@ -150,6 +150,28 @@ class IssuesController < ApplicationController
     @issue.save_attachments(params[:attachments] || (params[:issue] && params[:issue][:uploads]))
     if @issue.save
       call_hook(:controller_issues_new_after_save, { :params => params, :issue => @issue})
+	@project.iteration.each do | it | 
+			if it.status == "Open"
+				
+				@issue.stories.create(:name => @issue.subject , :issue_id => @issue.id, :Estimated_hours => @issue.estimated_hours)
+				@it_id = Story.find(:all , :conditions => {:issue_id => @issue.id})
+                                
+				 @it_id.each do | it_one|
+			            it_one.update_attribute("iteration_id" , it.id)
+					
+					end 
+			elsif it.status == "Planned"
+				@issue.stories.create(:name => @issue.subject , :issue_id => @issue.id, :Estimated_hours => @issue.estimated_hours)
+				@it_id = Story.find(:all , :conditions => {:issue_id => @issue.id})
+                                
+				 @it_id.each do | it_one|
+			            it_one.update_attribute("iteration_id" , it.id)
+					
+					end 
+                          
+			end
+		end 
+	
       respond_to do |format|
         format.html {
           render_attachment_warning_if_needed(@issue)

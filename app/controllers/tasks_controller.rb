@@ -56,6 +56,35 @@ def create
 
 end
 
+
+  def issue_tasks
+  @story_id = params[:story_id]
+  @project_id = params[:project_id]
+  @issue_id = params[:issue_id]
+  @story = Story.find(@story_id)
+  @task = Task.new
+  
+  end
+	
+ def task_create
+@issue = params[:issue_id]
+@iss = Issue.find(@issue)
+@issueid = Story.find(:all, :conditions=>{:issue_id => @issue})
+@issueid.each do |is|
+@issue_id = is.id
+end
+@name = params[:name]
+@story_id = 989
+@task_type = params[:task_type]
+@disposition = params[:disposition]
+@acceptor = params[:acceptor]
+@estimated_hours = params[:estimated_hours]
+@description = params[:description]
+@task = @iss.tasks.create(:name => @name,:task_type => @task_type, :disposition => @disposition , :acceptor => @acceptor, :estimated_hours => @estimated_hours, :description => @description, :story_id => @issue_id ,:issue_id => @issue)
+@task.save
+redirect_to  project_issues_path(@project)
+ end
+
 def edit
     @project = Project.find(params[:project_id])
     @iteration = @project.iteration.find(params[:iteration_id])

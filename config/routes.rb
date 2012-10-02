@@ -162,6 +162,15 @@ RedmineApp::Application.routes.draw do
 
     match 'issues/:copy_from/copy', :to => 'issues#new'
     resources :issues, :only => [:index, :new, :create] do
+	#get 'issue_tasks'
+     resources :stories do
+	resources :tasks do
+		collection do
+			get 'issue_tasks'
+			post 'task_create'
+			end
+		end
+	end
       resources :time_entries, :controller => 'timelog' do
         collection do
           get 'report'
@@ -173,6 +182,7 @@ RedmineApp::Application.routes.draw do
     match 'issues/issue', :controller => 'issues', :action => 'issue', :via => [:put, :post]
     match 'issues/add_issuetask', :controller => 'issues', :action => 'add_issuetask', :via => [:put, :post]
      match 'issues/task', :controller => 'issues', :action => 'task', :via => [:put, :post]
+   # match 'issues/stories', :controller => 'issues', :action => 'task', :via => [:put, :post]
     resources :files, :only => [:index, :new, :create]
 
     resources :versions, :except => [:index, :show, :edit, :update, :destroy] do

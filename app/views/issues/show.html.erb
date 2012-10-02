@@ -90,7 +90,11 @@
 <div class="contextual">
 <% @issue = Issue.find(params[:id]) %>
 <% @issue.id %>
-  <%= link_to "Add Task", my_issue_path(:id => @issue.id) %>
+<% @story = Story.where(:issue_id => @issue.id) %>
+<% @story.each do | st | %>
+<% @story_id = st.id.inspect %>
+<% end %> 
+  <%= link_to "Add Task" ,issue_tasks_project_issue_story_tasks_path(@project.id,@issue.id,@story_id)%>
 </div>
 <p><strong><%=l(:label_subtask_plural)%></strong></p>
 <%= render_descendants_tree(@issue) unless @issue.leaf? %>
@@ -103,6 +107,27 @@
 <%= render :partial => 'relations' %>
 </div>
 <% end %>
+<hr/>
+
+<b>List of Tasks </b>
+
+	<table width=100% bgcolor=#fff>
+	<tr>
+	<th>Name</th>
+	<th>Story name </th>
+	<th>Estimation time</th>
+	<th>Assignee </th>
+	</tr>
+	<% @tasks = Task.find(:all, :conditions => {:issue_id => @issue.id}) %>
+	<% @tasks.each do | task | %>
+	<tr>
+	<td align=center><%= task.name %></td>
+	<td align=center><%@task_story =  Story.find(task.story_id)%><%= @task_story.name  %></td>
+        <td align=center><%= task.estimated_hours %></td>
+	<td align=center><%= task.acceptor %></td>
+	</tr>
+	<% end %>
+	</table>
 
 </div>
 
@@ -156,3 +181,4 @@
 <% end %>
 
 <%= context_menu issues_context_menu_path %>
+
