@@ -158,6 +158,8 @@ class IssuesController < ApplicationController
 				 @it_id.each do | it_one|
 			           		 it_one.update_attribute("iteration_id" , it.id)
 					     end 
+			else
+			flash[:error] = "No iteration is in Open status"
 			end  
 		end
 	end 
@@ -209,21 +211,19 @@ class IssuesController < ApplicationController
     end
 
     if saved
-     if @issue.status_id == 2 
-     @project_iteration = Iteration.find(:all, :conditions => {:project_id => @project.id})
-     @project_iteration.each do |it|
-		if it.status == "Open"
-	 	    @current_it = it.id
+     	if @issue.status_id == 2 
+		@iter =  @project.iteration.find(:all) 
+		@iter.each do |it|
+	  		 if it.status == "Open"
+				@current_it = it.id
+				@story = @issue.stories.create(:name => @issue.subject , :issue_id => @issue.id, :Estimated_hours => @issue.estimated_hours)
+				@story.save
+       		        else 
+				flash[:error] = "No Iterations are in Open status"
+	 		 end
 		end
-	end
-     @story_name = Story.where(:issue_id => @issue.id)
-     @story_name.each do |st|
- 	raise st.iteration_id.inspect
-     end 
+         end
 
-
-
-     end 
       render_attachment_warning_if_needed(@issue)
       flash[:notice] = l(:notice_successful_update) unless @issue.current_journal.new_record?
 
