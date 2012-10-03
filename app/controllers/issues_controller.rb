@@ -150,20 +150,17 @@ class IssuesController < ApplicationController
     @issue.save_attachments(params[:attachments] || (params[:issue] && params[:issue][:uploads]))
     if @issue.save
       call_hook(:controller_issues_new_after_save, { :params => params, :issue => @issue})
-	@project.iteration.each do | it | 
-	        if @issue.status_id == 2
-			if it.status == "Open"
-				@issue.stories.create(:name => @issue.subject , :issue_id => @issue.id, :Estimated_hours => @issue.estimated_hours)
-				@it_id = Story.find(:all , :conditions => {:issue_id => @issue.id})
-				 @it_id.each do | it_one|
-			           		 it_one.update_attribute("iteration_id" , it.id)
-					     end 
-			else
-			flash[:error] = "No iteration is in Open status"
-			end  
-		end
-	end 
-	
+	if @issue.status_id == 2
+		@iter = @project.iteration.find(:all, :conditions => {:status => "Open"})
+		#raise @iter.inspect
+			@iter.each do |it|
+					@issue.stories.create(:name => @issue.subject , :issue_id => @issue.id, :Estimated_hours => @issue.estimated_hours)
+					@it_id = Story.find(:all , :conditions => {:issue_id => @issue.id})
+					@it_id.each do | it_one|
+					it_one.update_attribute("iteration_id" , it.id)
+					 end 
+			end
+	end
       respond_to do |format|
         format.html {
           render_attachment_warning_if_needed(@issue)
@@ -197,7 +194,23 @@ class IssuesController < ApplicationController
     @issue.save_attachments(params[:attachments] || (params[:issue] && params[:issue][:uploads]))
     saved = false
     begin
-      saved = @issue.save_issue_with_child_records(params, @time_entry)
+     
+	if @issue.status_id == 2
+	@iter = @project.iteration.find(:all, :conditions => {:status => "Open"})
+       # raise @project.id.inspect
+		if @iter == []
+		flash[:error] = "No open iterations in this project"
+                 redirect_to project_issues_path(@project.id) and return
+		end
+		@iter.each do |it|
+				@issue.stories.create(:name => @issue.subject , :issue_id => @issue.id, :Estimated_hours => @issue.estimated_hours)
+				@it_id = Story.find(:all , :conditions => {:issue_id => @issue.id})
+			        @it_id.each do | it_one|
+			        it_one.update_attribute("iteration_id" , it.id)
+				 end 
+		end
+	end
+	 saved = @issue.save_issue_with_child_records(params, @time_entry)
     rescue ActiveRecord::StaleObjectError
       @conflict = true
       if params[:last_journal_id]
@@ -211,20 +224,8 @@ class IssuesController < ApplicationController
     end
 
     if saved
-     	if @issue.status_id == 2 
-		@iter =  @project.iteration.find(:all) 
-		@iter.each do |it|
-	  		 if it.status == "Open"
-				@current_it = it.id
-				@story = @issue.stories.create(:name => @issue.subject , :issue_id => @issue.id, :Estimated_hours => @issue.estimated_hours)
-				@story.save
-       		        else 
-				flash[:error] = "No Iterations are in Open status"
-	 		 end
-		end
-         end
-
-      render_attachment_warning_if_needed(@issue)
+	
+     render_attachment_warning_if_needed(@issue)
       flash[:notice] = l(:notice_successful_update) unless @issue.current_journal.new_record?
 
       respond_to do |format|
