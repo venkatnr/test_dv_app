@@ -221,6 +221,7 @@ en:
   field_summary: Summary
   field_is_required: Required
   field_firstname: First name
+  field_Date_of_joining: Date of Joining
   field_lastname: Last name
   field_mail: Email
   field_filename: File
