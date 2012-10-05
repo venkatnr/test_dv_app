@@ -63,7 +63,7 @@ body {behavior: url(<%= stylesheet_path "csshover.htc" %>);}
 
 <%= tag('div', {:id => 'main', :class => (sidebar_content? ? '' : 'nosidebar')}, true) %>
     <div id="sidebar">
-        <%= yield :sidebar %>
+        <%#= yield :sidebar %>
         <%= view_layouts_base_sidebar_hook_response %>
     </div>
 
