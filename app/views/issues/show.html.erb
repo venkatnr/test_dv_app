@@ -125,7 +125,7 @@
 	<% @tasks = Task.find(:all, :conditions => {:issue_id => @issue.id}) %>
 	<% @tasks.each do | task | %>
 	<tr>
-	<td align=center><%= link_to task.name, project_iteration_story_task_path(@project.id, @iteration.id, @storyid, task.id) %></td>
+	<td align=center><%= link_to task.name, project_iteration_story_task_path(@project.id, @iteration.id, @storyid.id, task.id) %></td>
 	<td align=center><%@task_story =  Story.find(task.story_id)%><%= @task_story.name  %></td>
         <td align=center><%= task.estimated_hours %></td>
 	<td align=center><%= task.acceptor %></td>
