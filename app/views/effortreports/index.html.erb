@@ -1,0 +1,62 @@
+<html>
+<head>
+<%= stylesheet_link_tag( 'default')%>
+<%= javascript_include_tag('jquery.min', 'glDatePicker.min', 'date')%>
+</head>
+<%= form_tag effortreports_reports_path do %>
+<table>
+	<tr >
+
+		
+
+		<td>
+			Start Date:<%= text_field_tag 'start_date', value = "", :id => :popupDatepicker%>
+		</td>
+		<td>
+			End Date:<%= text_field_tag 'end_date',  value = "", :id => :popupDatepicker1%>
+		</td>
+		<td>
+			<%= hidden_field_tag 'start_date_hidden'%>
+		</td>
+		<td>
+			<%= hidden_field_tag 'end_date_hidden'%>
+		</td>
+
+	</tr>
+	<tr>
+
+		<td>
+			<%#= submit_tag 'Generate', :id => "generateid"%> <%#= submit_tag 'reset', :id => "cleardates"%>
+		</td>
+	</tr>
+</table>
+<%= submit_tag "Submit" %>
+<% end %>
+
+<script>
+	$("#popupDatepicker").glDatePicker(
+	{
+		onChange: function(target, newDate)
+		{
+			target.val
+			(
+				newDate.getFullYear() + "-" +
+				(newDate.getMonth() + 1) + "-" +
+				newDate.getDate()
+			);
+		}
+	});
+	$("#popupDatepicker1").glDatePicker(
+	{
+		onChange: function(target, newDate)
+		{
+			target.val
+			(
+				newDate.getFullYear() + "-" +
+				(newDate.getMonth() + 1) + "-" +
+				newDate.getDate()
+			);
+		}
+	});
+</script>
+</html>

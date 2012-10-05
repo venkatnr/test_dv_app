@@ -16,6 +16,10 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 RedmineApp::Application.routes.draw do
+  get "effortreports/index"
+  post "effortreports/reports"
+  get "reports/index"
+  
 	  resources :tasks do
 			collection do
 			   post 'logs'

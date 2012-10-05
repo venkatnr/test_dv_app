@@ -159,6 +159,7 @@ Redmine::MenuManager.map :top_menu do |menu|
   menu.push :administration, { :controller => 'admin', :action => 'index' }, :if => Proc.new { User.current.admin? }, :last => true
   # menu.push :welcome_to_LogicMatter_Visper_Tool , :myprojects_path
  # menu.push :help, Redmine::Info.help_url, :last => true
+ menu.push :Reports, {:controller => 'effortreports' , :action => 'index'}
 end
 
 Redmine::MenuManager.map :account_menu do |menu|
