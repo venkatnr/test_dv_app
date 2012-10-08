@@ -1,5 +1,6 @@
 <html>
 <div class="contextual">
+
   <% if User.current.allowed_to?(:add_subprojects, @project) %>
     <%= link_to l(:label_subproject_new), {:controller => 'projects', :action => 'new', :parent_id => @project}, :class => 'icon icon-add' %>
   <% end %>
@@ -83,7 +84,7 @@
 			<% @pro_id = Project.find(params[:id]) %>
 				<% it.story.each do |st| %>
 					<% st.tasks.each do |task| %>
-						<% if task.acceptor == user %>
+						<% if task.acceptor == User.current.lastname %>
 						<tr width="600px">	
 						<td width="100px"><%=link_to task.name, project_iteration_story_task_path(@pro_id, it.id, st.id, task.id)%></td>
 						<td width="100px"><%= task.task_type %></td>
