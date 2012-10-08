@@ -5,7 +5,7 @@
   <% end %>
 </div>
 <h2><%=l(:label_overview)%></h2>
-<%= javascript_include_tag('RGraph.bar', 'RGraph.common.core')%>
+<%#= javascript_include_tag('RGraph.bar', 'RGraph.common.core')%>
 <body>
 <table border="1" width="800" class="test_border">
   <tr>
@@ -19,7 +19,7 @@
 		<div class="splitcontentleft">
 		  <div class="wiki">
 		  <b>Project Name :<u><%= @project.name %></u></b><br/>
-		<b>Total Project Estimated Hours: <u><%= @project.estimation_time %> </u></b><br/>
+		<b>Total Project Estimated Hours: <u><%#= @project.estimation_time %> </u></b><br/>
 		<b>Description : <u><%= @project.description %></u></b><br/>
 
 		 <% unless @project.id.blank? %>
