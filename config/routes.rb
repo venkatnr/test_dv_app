@@ -16,10 +16,12 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 RedmineApp::Application.routes.draw do
+  resources :absences
+
   get "effortreports/index"
   post "effortreports/reports"
   get "reports/index"
-  
+
 	  resources :tasks do
 			collection do
 			   post 'logs'
@@ -117,7 +119,8 @@ RedmineApp::Application.routes.draw do
   match 'my/logs', :controller => 'my', :action => 'logs', :via => [:get, :post]
   match 'my/issue', :controller => 'my', :action => 'issue', :via => [:get, :post]
   match 'my/add_issuetask', :controller => 'my', :action => 'add_issuetask', :via => [:put, :post]
-  resources :users
+  resources :users  
+   
   match 'users/:id/memberships/:membership_id', :to => 'users#edit_membership', :via => :put, :as => 'user_membership'
   match 'users/:id/memberships/:membership_id', :to => 'users#destroy_membership', :via => :delete
   match 'users/:id/memberships', :to => 'users#edit_membership', :via => :post, :as => 'user_memberships'
@@ -133,7 +136,7 @@ RedmineApp::Application.routes.draw do
   match 'projects/:id/settings/:tab', :to => "projects#settings"
   
 
-  
+
      
   
   resources :projects do
@@ -408,4 +411,5 @@ RedmineApp::Application.routes.draw do
       end
     end
   end
+
 end

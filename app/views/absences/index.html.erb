@@ -1,0 +1,33 @@
+<h1>Listing absences</h1>
+
+<table bgcolor=#f4f4f4>
+  <tr bgcolor=#d7d7d7>
+    <th width=10%>Date of joining</th>
+    <th width=10%>Employee</th>
+    <th width=10%>No of hours</th>
+    <th width=15%>Emp name</th>
+    <th width=15%>Group</th>
+    <th width=10%>User</th>
+    <th width=10%></th>
+    <th width=10%></th>
+    <th width=10%></th>
+  </tr>
+
+<% @absences.each do |absence| %>
+  <tr>
+    <td width=10%><%= absence.date_of_joining %></td>
+    <td width=10%><%= absence.employee_id %></td>
+    <td width=10%><%= absence.no_of_hours %></td>
+    <td width=15%><%= absence.emp_name %></td>
+    <td width=15%><%= absence.group %></td>
+    <td width=10%><%= absence.user_id %></td>
+    <td width=10%><%= link_to 'Show', absence %></td>
+    <td width=10%><%= link_to 'Edit', edit_absence_path(absence) %></td>
+    <td width=10%><%= link_to 'Destroy', absence, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Absence', new_absence_path %>

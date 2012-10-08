@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  date_of_joining: 2012-10-08
+  employee_id: MyString
+  no_of_hours: 1.5
+  emp_name: MyString
+  group: MyString
+  user_id: MyString
+
+two:
+  date_of_joining: 2012-10-08
+  employee_id: MyString
+  no_of_hours: 1.5
+  emp_name: MyString
+  group: MyString
+  user_id: MyString

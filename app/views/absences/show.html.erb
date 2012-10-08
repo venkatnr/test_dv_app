@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Date of joining:</b>
+  <%= @absence.date_of_joining %>
+</p>
+
+<p>
+  <b>Employee:</b>
+  <%= @absence.employee_id %>
+</p>
+
+<p>
+  <b>No of hours:</b>
+  <%= @absence.no_of_hours %>
+</p>
+
+<p>
+  <b>Emp name:</b>
+  <%= @absence.emp_name %>
+</p>
+
+<p>
+  <b>Group:</b>
+  <%= @absence.group %>
+</p>
+
+<p>
+  <b>User:</b>
+  <%= @absence.user_id %>
+</p>
+
+
+<%= link_to 'Edit', edit_absence_path(@absence) %> |
+<%= link_to 'Back', absences_path %>
