@@ -9,70 +9,8 @@
 <body>
 <table border="1" width="800" class="test_border">
   <tr>
-    <td >
-		<div class="contextual">
-		  <% if User.current.allowed_to?(:add_subprojects, @project) %>
-			<%#= link_to l(:label_subproject_new), {:controller => 'projects', :action => 'new', :parent_id => @project}, :class => 'icon icon-add' %>
-		  <% end %>
-		</div>
-		<% user = User.current.lastname %>
-		<div class="splitcontentleft">
-		  <div class="wiki">
-		  <b>Project Name :<u><%= @project.name %></u></b><br/>
-		<b>Total Project Estimated Hours: <u><%#= @project.estimation_time %> </u></b><br/>
-		<b>Description : <u><%= @project.description %></u></b><br/>
-
-		 <% unless @project.id.blank? %>
-			<%@iteration_relatedcurrent_project = Iteration.find(:all, :conditions => {:project_id => @project.id})%>
-		<% unless @iteration_relatedcurrent_project.blank? %>
-		
-		<% @iteration_relatedcurrent_project.each do |iterationid|%>
-			<% @iteratonid = iterationid.id%>
-		<%end%>
-		<%else%>
-			<%@iteratonid =0%>
-		<%end%>
-		<%@story_estimation = Story.find(:all, :conditions => {:iteration_id => @iteratonid })%>
-		<% unless @story_estimation.blank? %>
-		
-		<%@story_test_id=Array.new%>
-		<%@final_story_estimation = 0%>
-		<%@story_estimation.each do |story_est|%>
-			<%#@final_story_estimation += story_est.Estimated_hours%>
-			<%@story_test_id << story_est.id%>
-		<%end%>
-		<%else%>
-			<% @final_story_estimation =0%>
-		<%end%>
-		<% unless @story_test_id.blank? %>
-		<% @story_test_id.each do |alltask|%>
-			<% @tasks_all = Task.find(:all, :conditions => {:story_id => alltask }) %>
-		<%end%>
-		<% @count_tasks_estimation = 0%>
-		<% @tasks_all.each do |all_task_estimation| %>
-			<%@count_tasks_estimation += all_task_estimation.estimated_hours%>
-		<%end%>
-		<%else%>
-			
-		<%end%>
-		<%else%>
-			
-		<%end%>
-		<canvas id="testgraph" width="250" height="150"></canvas>	
-		<script>
-			window.onload = function ()
-			{
-				var bar5 = new RGraph.Bar('testgraph', [[<%=@project.estimation_time%>, <%= @final_story_estimation%>, <%= @count_tasks_estimation%>]]);
-				bar5.Set('chart.colors', ['#CC1111', '#11CCCC', '#1111CC']); 
-				bar5.Set('chart.labels', ['Project', 'UserStory', 'Task']);
-				bar5.Set('chart.strokestyle', 'transparent');
-				bar5.Set('chart.ymax', <%=@project.estimation_time%>);
-				bar5.Draw();
-			}
-		</script>
-	</td>
     <td width="250">
-			<div class="splitcontentleft">
+	<div class="splitcontentleft">
 		
 			  <% unless @project.homepage.blank? %>
 				<li><%=l(:field_homepage)%>: <%= link_to h(@project.homepage), @project.homepage %></li>
@@ -114,6 +52,19 @@
 			  <% end %>
 			  <%= call_hook(:view_projects_show_left, :project => @project) %>
 			</div>
+	</td>
+    <td  width="300">
+		<div class="splitcontentright">
+  <%= render :partial => 'members_box' %>
+  <% if @news.any? && authorize_for('news', 'index') %>
+	  <div class="news box">
+		<h3><%=l(:label_news_latest)%></h3>
+		<%= render :partial => 'news/news', :collection => @news %>
+		<p><%= link_to l(:label_news_view_all), :controller => 'news', :action => 'index', :project_id => @project %></p>
+	  </div>
+	  <% end %>
+	  <%= call_hook(:view_projects_show_right, :project => @project) %>
+	</div>
     </td>
   </tr>
 </table>
@@ -148,18 +99,62 @@
 <%end%>
 
  <%= link_to "iterations", project_iterations_path(@project.id)  %>
-<div class="splitcontentright">
-  <%= render :partial => 'members_box' %>
+ <h2><%= link_to @project.name, project_path(@project) %> >> <%= @iteration.name %></h2>
+<table>
+<tr>
 
-  <% if @news.any? && authorize_for('news', 'index') %>
-  <div class="news box">
-    <h3><%=l(:label_news_latest)%></h3>
-    <%= render :partial => 'news/news', :collection => @news %>
-    <p><%= link_to l(:label_news_view_all), :controller => 'news', :action => 'index', :project_id => @project %></p>
-  </div>
-  <% end %>
-  <%= call_hook(:view_projects_show_right, :project => @project) %>
-</div>
+<td>
+Name:
+</td>
+<td>
+<%= @iteration.name %>
+</td>
+</tr>
+<tr>
+
+<td>
+Iteation Type:
+</td>
+<td>
+<%= @iteration.iterationtype %>
+</td>
+</tr>
+<tr>
+<td>
+Start_date
+</td>
+<td>
+<%= @iteration.start_date %>
+</td>
+</tr>
+<tr>
+<td>
+End_date
+</td>
+<td>
+<%= @iteration.end_date %>
+</td>
+</tr>
+<tr>
+<td>
+Status
+</td>
+<td>
+<%= @iteration.status %>
+</td>
+</tr>
+<tr>
+<td>
+Description
+</td>
+<td>
+<%= @iteration.description %>
+</td>
+</tr>
+</table>
+<%#= @project.id %>
+<%#= @iteration.id %>
+<%#= link_to "users_stories", project_iteration_stories_path(@project.id, @iteration.id )%>
 
 <% content_for :sidebar do %>
     <% if @total_hours.present? %>

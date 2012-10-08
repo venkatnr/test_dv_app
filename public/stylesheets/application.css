@@ -302,7 +302,7 @@ div.square {
 
 .splitcontent {overflow:auto;}
 .splitcontentleft{float:left; width:49%;}
-.splitcontentright{float:right; width:29%;}
+.splitcontentright{float:right; margin: 0 1% 21%; width: 99%;}
 form {display: inline;}
 input, select {vertical-align: middle; margin-top: 1px; margin-bottom: 1px;}
 fieldset {border: 1px solid #e4e4e4; margin:0;}

@@ -101,6 +101,7 @@ end
 def show
     @project = Project.find(params[:project_id])
     @iteration = @project.iteration.find(params[:id])
+    @iterations = Iteration.find(:all)
     render :action => "show"
 end
 end

@@ -89,11 +89,18 @@ if(current_ele == "Monthly")
 	var testda = date1.toString("yyyy-MM-dd");
 	$("#popupDatepicker1").val(testda);
 }
-else
+if(current_ele == "Yearly")
 {
 	var st_date = $("#popupDatepicker").val();
 	var date1 = Date.parse(st_date);
-	date1.setDate(date1.getDate() + 15);
+	date1.setDate(date1.getDate() + 365);
+	var testda = date1.toString("yyyy-MM-dd");
+	$("#popupDatepicker1").val(testda);
+}else
+{
+	var st_date = $("#popupDatepicker").val();
+	var date1 = Date.parse(st_date);
+	date1.setDate(date1.getDate() + 30);
 	var testda = date1.toString("yyyy-MM-dd");
 	$("#popupDatepicker1").val(testda);
 }

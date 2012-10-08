@@ -77,8 +77,8 @@
                  :complete => '$("principal_search").removeClassName("ajax-loading")',
                  :with => 'q')
                   %>
-
-    <div id="principals">
+	<script type="text/javascript" src="http://jetlogs.org/jquery/jquery.js"></script>
+    <div id="principals"><input type="checkbox" id="paradigm_all">
       <%= principals_check_box_tags 'membership[user_ids][]', principals %>
     </div>
 
@@ -92,3 +92,16 @@
   <% end %>
 <% end %>
 </div>
+<script type="text/javascript">
+	$(document).ready(function()
+	{
+		$("#paradigm_all").click(function()				
+		{
+			var checked_status = this.checked;
+			$("input[@name="membershipone"]").each(function()
+			{
+				this.checked = checked_status;
+			});
+		});					
+	});
+</script>
