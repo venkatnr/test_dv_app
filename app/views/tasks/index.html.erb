@@ -69,8 +69,11 @@
 
 	     <% end %>
 </table>
-
+<% if @project.name == "Abseence data" %>
+<%= link_to "create Task",  new_project_iteration_story_attendance_path(@project.id, @iteration.id,@story.id) %>
+<% else %>
 <%= link_to "create Task" , new_project_iteration_story_task_path(@project.id, @iteration.id,@story.id) %>
+<% end %>
 
 <script>
 	$('.updatetime').colorbox();

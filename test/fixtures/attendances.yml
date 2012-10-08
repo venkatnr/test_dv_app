@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  leave_type: MyString
+  subject: MyString
+  date: 2012-10-08
+  hours: 1.5
+  story: 
+
+two:
+  leave_type: MyString
+  subject: MyString
+  date: 2012-10-08
+  hours: 1.5
+  story: 
