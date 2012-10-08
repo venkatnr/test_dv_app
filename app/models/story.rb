@@ -3,4 +3,5 @@ class Story < ActiveRecord::Base
 has_many :tasks
   attr_accessible :Estimated_hours, :customer, :disposition, :name, :order, :priority, :status, :tracker, :Type
  validates_uniqueness_of :name
+has_many :attendances
 end

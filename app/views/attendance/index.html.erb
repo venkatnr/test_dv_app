@@ -1,0 +1,17 @@
+<table>
+<tr bgcolor=#d7d7d7>
+<th>Subject</th>
+<th>Date</th>
+<th>Leave type</th>
+<th>hours</th>
+</tr>
+<% @attendances.each do |at| %>
+<tr>
+<td><%= at.subject %></td>
+<td><%= at.date %></td>
+<td><%= at.leave_type %></td>
+<td><%= at.hours %></td>
+</tr>
+<% end %>
+</table>
+

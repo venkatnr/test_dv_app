@@ -149,6 +149,8 @@ RedmineApp::Application.routes.draw do
     end
 	 resources :iterations do 
 		resources :stories do
+			resources :attendance
+			
 		  resources :tasks do
 	 	    collection do 
 			get 'total_tasks'
