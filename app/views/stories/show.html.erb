@@ -1,81 +1,98 @@
 <html>
-<h2><%= link_to @project.name, project_path(@project)%> >> <%= link_to @iteration.name,  project_iteration_path(@project.id, @iteration.id, @story.id )%> >> <%= @story.name %></h2>
+<h2><%= link_to "All Iterations", project_path(@project)%> >> <%= link_to "All Stories",  project_iteration_path(@project.id, @iteration.id, @story.id )%> >> <%= @story.name %></h2>
 <table>
 <tr>
-
-<td>
-Name:
-</td>
-<td>
-<%= @story.name %>
-</td>
+	<th>Name
+	</th>
+	<th>Type
+	</th>
+	<th>Description
+	</th>
+	<th>Customer
+	</th>
+	<th>Tracker
+	</th>
+	<th>Status
+	</th>
+	<th>Priority
+	</th>
+	<th>Order
+	</th>
+	<th>Estimated_hours
+	</th>
 </tr>
 <tr>
-
-<td>
-Type:
-</td>
-<td>
-<%= @story.Type %>
-</td>
-</tr>
-<tr>
-<td>
-description
-</td>
-<td>
-<%= @story.disposition%>
-</td>
-</tr>
-<tr>
-<td>
-customer
-</td>
-<td>
-<%= @story.customer %>
-</td>
-</tr>
-<tr>
-<td>
-tracker
-</td>
-<td>
-<%= @story.tracker %>
-</td>
-</tr>
-<tr>
-<td>
-status
-</td>
-<td>
-<%= @story.status %>
-</td>
-</tr>
-<tr>
-<td>
-priority
-</td>
-<td>
-<%= @story.priority %>
-</td>
-</tr>
-<tr>
-<td>
-order
-</td>
-<td>
-<%= @story.order %>
-</td>
-</tr>
-<tr>
-<td>
-Estimated_hours
-</td>
-<td>
-<%= @story.Estimated_hours %>
-</td>
+	<td>
+		<%= @story.name %>
+	</td>
+	<td>
+		<%= @story.Type %>
+	</td>
+	<td>
+		<%= @story.disposition%>
+	</td>
+	<td>
+		<%= @story.customer %>
+	</td>
+	<td>
+		<%= @story.tracker %>
+	</td>
+	<td>
+		<%= @story.status %>
+	</td>
+	<td>
+		<%= @story.priority %>
+	</td>
+	<td>
+		<%= @story.order %>
+	</td>
+	<td>
+		<%= @story.Estimated_hours %>
+	</td>
 </tr>
 </table>
-
-<%= link_to "tasks list",  project_iteration_story_tasks_path(@project.id,@iteration.id, @story.id )%>
+<h3>ALL TASKS</h3>
+	<table>
+		<tr>
+			<th>Task Name	
+			</th>
+			<th>Task Type	
+			</th>
+			<th>Disposition
+			</th>
+			<th>Acceptor	
+			</th>
+			<th>Estimation Time
+			</th>
+			<th>Description
+			</th>
+		</tr>
+		<% @story.tasks.each do |ts| %>	 
+			<tr  align="center" border = "1px">
+				<td >
+					<% pro = Project.find(params[:project_id]) %>
+					<%if ts.status == true%>        
+						<s><%= link_to ts.name, project_iteration_story_task_path(pro.id,@iteration.id,@story.id,ts.id) %></s>
+                          <%else%>
+                      <%= link_to ts.name, project_iteration_story_task_path(pro.id,@iteration.id,@story.id,ts.id) %>
+                <%end%>
+				</td>
+				<td >
+					<%=  ts.task_type %>
+				</td>
+				<td >
+					<%=  ts.disposition %>
+				</td>
+				<td >
+					<%=  ts.acceptor %>
+				</td>
+				<td >
+					<%=  ts.estimated_hours.round(2) %>
+				</td>
+				<td >
+					<%=  ts.description %>
+				</td>
+	     <% end %>
+	 </table>
+<%= link_to "create Task" , new_project_iteration_story_task_path(@project.id, @iteration.id,@story.id) %>
 </html>

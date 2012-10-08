@@ -52,7 +52,7 @@ def create
        #	 TaskMailer.task_creation(@usermail,@iname,@tid).deliver
 	end
        #render :action => "show"
-         	redirect_to project_iteration_story_task_path(@projectid.id, @iterationid.id, @storyid.id, @tid )
+         	redirect_to project_iteration_story_path(@projectid.id, @iterationid.id, @storyid.id)
 
 end
 

@@ -68,12 +68,12 @@ def create
 	@all_enddates = Iteration.find(:all, :select => "end_date" ,:conditions => {:project_id => @project.id}).map(&:end_date)
 	if @all_enddates == []
 	@iteration.save
-	redirect_to project_iteration_path(@project.id, @iteration.id ) and return
+	redirect_to project_path(@project.id) and return
 	else
 	@all_enddates.each do |end_date|
 	if @iteration.start_date > end_date
 	@iteration.save
-	redirect_to project_iteration_path(@project.id, @iteration.id ) and return
+	redirect_to project_path(@project.id)  and return
 	else
 	flash[:error] ="Please select differenct dates"
 	redirect_to new_project_iteration_path(@project.id) and return

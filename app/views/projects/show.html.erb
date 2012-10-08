@@ -98,79 +98,53 @@
 			</table>
 <%end%>
 
- <%= link_to "iterations", project_iterations_path(@project.id)  %>
- <h2><%= link_to @project.name, project_path(@project) %> >> <%= @iteration.name %></h2>
 <table>
-<tr>
+		<tr>
+			<th>
+				Iteration Name
+			</th>
+			<th>
+				Iteration Type
+			</th>
+			<th>
+				Start Date
+			</th>
+			<th>
+				End Date
+			</th>
+			<th>
+				Status
+			</th>	
+			<th>
+				
+			</th>
+		</tr>
+		<%@project.iteration.each do |it| %>
+			<tr width="900px" align="center"  >
+				<td width ="200px">
+					<%= link_to it.name, project_iteration_path(@project.id, it.id)  %>
+				</td>
+				<td width ="100px">
+					<%= it.iterationtype %>
+				</td>
+				<td width ="100px">
+					<%= it.start_date %>
+				</td>
+				<td width ="100px">
+					<%= it.end_date %>
+				</td>
+				<td width ="500px">
+					<%= it.status %>
+				</td>
+  					<td><%= link_to "edit", edit_project_iteration_path(@project.id, it.id) %></td><br>
+			</tr>
+		  	
+		<% end %>
+		</table>
+<%if User.current.admin?  %>
+	<%= link_to "New Iteration",  new_project_iteration_path(@project.id) %>
+<%end %>
 
-<td>
-Name:
-</td>
-<td>
-<%= @iteration.name %>
-</td>
-</tr>
-<tr>
-
-<td>
-Iteation Type:
-</td>
-<td>
-<%= @iteration.iterationtype %>
-</td>
-</tr>
-<tr>
-<td>
-Start_date
-</td>
-<td>
-<%= @iteration.start_date %>
-</td>
-</tr>
-<tr>
-<td>
-End_date
-</td>
-<td>
-<%= @iteration.end_date %>
-</td>
-</tr>
-<tr>
-<td>
-Status
-</td>
-<td>
-<%= @iteration.status %>
-</td>
-</tr>
-<tr>
-<td>
-Description
-</td>
-<td>
-<%= @iteration.description %>
-</td>
-</tr>
-</table>
-<%#= @project.id %>
-<%#= @iteration.id %>
-<%#= link_to "users_stories", project_iteration_stories_path(@project.id, @iteration.id )%>
-
-<% content_for :sidebar do %>
-    <% if @total_hours.present? %>
-    <h3><%= l(:label_spent_time) %></h3>
-    <p><span class="icon icon-time"><%= l_hours(@total_hours) %></span></p>
-    <p><%= link_to(l(:label_details), project_time_entries_path(@project)) %> |
-    <%= link_to(l(:label_report), report_project_time_entries_path(@project)) %></p>
-    <% end %>
-    <%= call_hook(:view_projects_show_sidebar_bottom, :project => @project) %>
-<% end %>
-
-<% content_for :header_tags do %>
-<%= auto_discovery_link_tag(:atom, {:controller => 'activities', :action => 'index', :id => @project, :format => 'atom', :key => User.current.rss_key}) %>
-<% end %>
-
-<% html_title(l(:label_overview)) -%>
 </body>
 </html>
 <% request.referer %>

@@ -89,7 +89,7 @@ if(current_ele == "Monthly")
 	var testda = date1.toString("yyyy-MM-dd");
 	$("#popupDatepicker1").val(testda);
 }
-if(current_ele == "Yearly")
+else if(current_ele == "Yearly")
 {
 	var st_date = $("#popupDatepicker").val();
 	var date1 = Date.parse(st_date);
