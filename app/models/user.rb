@@ -50,6 +50,7 @@ class User < Principal
   has_one :preference, :dependent => :destroy, :class_name => 'UserPreference'
   has_one :rss_token, :class_name => 'Token', :conditions => "action='feeds'"
   has_one :api_token, :class_name => 'Token', :conditions => "action='api'"
+  has_many :leaves
   belongs_to :auth_source
 
   # Active non-anonymous users scope
