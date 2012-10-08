@@ -157,8 +157,7 @@ Redmine::MenuManager.map :top_menu do |menu|
  menu.push :projects, { :controller => 'projects', :action => 'index' },  :if => Proc.new { User.current.admin? }, :last => true, :caption => :label_project_plural
  
   menu.push :administration, { :controller => 'admin', :action => 'index' }, :if => Proc.new { User.current.admin? }, :last => true
- menu.push :Hr , :new_absence_path,  :if => Proc.new { User.current.admin? }, :last => true, :caption => :label_project_plural
- # menu.push :help, Redmine::Info.help_url, :last => true
+ menu.push :HR , :new_absence_path,  :if => Proc.new { User.current.admin? }, :last => true, :caption => "HR"
  menu.push :Reports, {:controller => 'effortreports' , :action => 'index'}
 end
 
