@@ -4,14 +4,14 @@
 <div class="box tabular">
 <!--[form:project]-->
 <p><%= f.text_field :name, :required => true, :size => 60 %></p>
-<p><%= f.text_field :estimation_time, :required => true, :size => 60 %></p>
+<%#= f.text_field :estimation_time, :size => 60 %>
 
-<p><%= f.select(:typeofproject, options_for_select(["Client","Growth", "Quality", "Vispertools"]), :required => true) %></p>
+<p><%= f.select(:typeofproject, options_for_select(["Client","Growth", "Quality", "Vispertools", "HR"]), :required => true) %></p>
 <% unless @project.allowed_parents.compact.empty? %>
     <p><%= label(:project, :parent_id, l(:field_parent)) %><%= parent_project_select_tag(@project) %></p>
 <% end %>
 
-<p><%= f.text_area :description %></p>
+<p><%= f.text_area :description, :cols => "85%" %></p>
 <p><%= f.text_field :identifier, :required => true, :size => 60%>
 <% unless @project.identifier_frozen? %>
   <em class="info"><%= l(:text_length_between, :min => 1, :max => Project::IDENTIFIER_MAX_LENGTH) %> <%= l(:text_project_identifier_info).html_safe %></em>
