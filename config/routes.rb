@@ -16,7 +16,15 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 RedmineApp::Application.routes.draw do
-  resources :absences 
+  match '/calendar(/:year(/:month))' => 'calendar#index', :as => :calendar, :constraints => {:year => /\d{4}/, :month => /\d{1,2}/}
+
+  resources :holidays
+
+  resources :absences  do
+   collection do
+	get 'holidays_calendar'
+   end
+ end 
 
   get "effortreports/index"
   post "effortreports/reports"
