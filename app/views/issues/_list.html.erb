@@ -30,7 +30,7 @@
     <td class="checkbox hide-when-print"><%= check_box_tag("ids[]", issue.id, false, :id => nil) %></td>
     <td class="id"><%= link_to issue.id, issue_path(issue) %></td>
         <%= raw query.columns.map {|column| "<td class=\"#{column.css_classes}\">#{column_content(column, issue)}</td>"}.join %>
-     <td><b><u><%= link_to "update", issue_path(issue) %></b></u></td>
+     <td><b><u><%= link_to_if_authorized(l(:button_update), {:controller => 'issues', :action => 'edit', :id => issue }, :onclick => 'showAndScrollTo("update", "notes"); return false;', :class => 'icon icon-edit', :accesskey => accesskey(:edit)) %></b></u></td>
   </tr>
   <% end -%>
   </tbody>
