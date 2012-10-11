@@ -4,10 +4,10 @@
 
 production:
   adapter: mysql
-  database: redmine_new
+  database: mydb_vtool
   host: localhost
   username: root
-  password: tiger
+  password: 
   encoding: utf8
 
 development:

@@ -45,8 +45,8 @@ class AbsencesController < ApplicationController
     @project = Project.find(:all, :conditions => {:name => "Abseence data"}).first
     @iterations = @project.iteration.find(:all)
     @iterations.each do |it|
-    @story = Story.create(:name => @absence.emp_name,:iteration_id =>  it.id)
-     @story.update_attribute("iteration_id",it.id)
+		@story = Story.create(:name => @absence.emp_name, :iteration_id =>  it.id)
+		@story.update_attribute("iteration_id",it.id)
     end
     end
     respond_to do |format|
