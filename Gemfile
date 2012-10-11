@@ -9,7 +9,7 @@ gem "builder"
 gem "mysql"
 gem "cancan"
 #gem 'client_side_validations'
-
+gem 'event-calendar', :require => 'event_calendar'
 
 # Optional gem for LDAP authentication
 group :ldap do

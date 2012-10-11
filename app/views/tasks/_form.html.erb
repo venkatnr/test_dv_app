@@ -8,7 +8,7 @@
     <td><%= f.text_field :name %></td></tr>
  <tr><td id="tdleft">
     <%= f.label :task_type %></td>
-    <td><%= f.select(:task_type, options_for_select(["Analysis", "Collabrate", "Develop","Debug", "Test", "Other"])) %></td></tr>
+    <td><%= f.select(:task_type, options_for_select(["Analysis", "Collabrate", "Develop","Debug", "Test", "Other","leave"])) %></td></tr>
  <tr><td id="tdleft">
     <%= f.label :disposition %></td>
     <td><%= f.select(:disposition, options_for_select(["Added", "Planned", "Carried Over", "Discovered" ])) %></td>
@@ -18,9 +18,20 @@
 	<td><%= f.select :acceptor, User.find(:all, :conditions =>"lastname= Admin").collect{|p|[p.lastname]},  {:include_blank => 'select'} %></td></tr>
  <tr><td id="tdleft">
     <%= f.label :estimated_hours %></td>
-    <td><%= f.text_field :estimated_hours%></td></tr>
+<script>
+var value = document.getElementById("task_type").value
+alert(value);
+</script>
+<% if :task_type == "leave" %>
+<% validates_numericality_of :estimated_hours, :greater_than => 0, :less_than => 8 %>    
+        <td><%= f.text_field :estimated_hours, :validate => { :uniqueness => true } %></td></tr>
+<% else %>
+	<td><%= f.text_field :estimated_hours%></td></tr>
+<% end %>
+
  <tr><td id="tdleft">
     <%= f.label :description %></td>
+
     <td><%= f.text_area :description  %></td></tr>
   <tr><td>
     <%= f.submit %></td></tr>

@@ -30,7 +30,8 @@ text-align :center;
 
 <%= link_to "Reports",my_reports_path %> |
 <%= link_to "My Timesheet" , my_timesheet_path %> 
-<%#= link_to "Backlogs", backlogs_path %>
+<%#= link_to "Backlogs", backlogs_path %>|
+<%= link_to "Hr",absences_path %>
 <br/>
 <table width=100%>
 <tr width=100%>
@@ -63,6 +64,7 @@ text-align :center;
 			        
 			 	<% @projects.each do |pro| %>
 					<% if pro.id == it.project_id %>
+						<% if taskmain.task_type != "leave" %>
 					  <td width=10%><%= pro.name %></td>
 					   <td width=10%> <%=taskmain.name%></td>
 					  
@@ -88,7 +90,7 @@ text-align :center;
 								<td><%= text_field_tag "spent_hours[#{t}][:description]" %>
 							</td>
 		                                        
-						
+						<% end %>
 					<% end %>
 				<% end %>	
 		     <% end %>
