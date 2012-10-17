@@ -143,7 +143,7 @@ class ProjectsController < ApplicationController
   # Show @project
   def show
 @project = Project.find(params[:id])
-@iterations = @project.iteration.paginate(:page => params[:page], :per_page => 4)
+@iterations = @project.iteration.paginate(:page => params[:page], :per_page => 8)
  @project.safe_attributes = params[:project]
 
     if params[:jump]

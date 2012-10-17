@@ -27,9 +27,8 @@ body {behavior: url(<%= stylesheet_path "csshover.htc" %>);}
 <div id="wrapper">
 <div id="wrapper2"   >
 <div id="top-menu"  >
- 
-    <div id="account">
-		
+ <%@user = User.find(:all)%>
+    <div id="account">	
         <%= render_menu :account_menu -%>
     </div>
     <%= render_menu :top_menu if User.current.logged? || !Setting.login_required? -%>
@@ -63,7 +62,7 @@ body {behavior: url(<%= stylesheet_path "csshover.htc" %>);}
 
 <%= tag('div', {:id => 'main', :class => (sidebar_content? ? '' : 'nosidebar')}, true) %>
     <div id="sidebar">
-        <%#= yield :sidebar %>
+        <%= yield :sidebar %>
         <%= view_layouts_base_sidebar_hook_response %>
     </div>
 
