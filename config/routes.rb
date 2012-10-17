@@ -156,6 +156,8 @@ RedmineApp::Application.routes.draw do
    resources :issues do
    collection do
 	get 'current_iteration'
+	get 'parking_garage'
+	get 'completed'
 	end
 	end
 

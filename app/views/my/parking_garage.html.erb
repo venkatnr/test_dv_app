@@ -30,7 +30,7 @@
 		<td align=center><%= p.priority %></td>
 		<td align=center><%= link_to p.subject, issue_path(p.id) %></td>
 		<td align=center><%= p.updated_on.to_date %></td>
-		<td><%= link_to "update", edit_issue_path(p.id) %><%= link_to_if_authorized(l(:button_update), {:controller => 'issues', :action => 'edit', :id => p.id }, :onclick => 'showAndScrollTo("update", "notes"); return false;', :class => 'icon icon-edit', :accesskey => accesskey(:edit)) %></td>
+		<td><%= link_to "update", edit_issue_path(p.id) %></td>
 	</tr>
 	
 	<% end %>

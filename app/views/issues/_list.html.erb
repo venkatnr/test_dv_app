@@ -1,6 +1,6 @@
 <%#= raise @project.id.inspect %>
-<%= link_to "Current iteration", current_iteration_project_issues_path(1) %> |  <%= link_to "Parking Garage",  my_parking_garage_path %> | 
-<%= link_to "Completed issues",my_completed_path %> 
+<%= link_to "Current iteration",  current_iteration_issues_path %> |  <%= link_to "Parking Garage", parking_garage_issues_path %> | 
+<%= link_to "Completed issues",completed_issues_path %> 
 <hr/><br/>
 <%= form_tag({}) do -%>
 <%= hidden_field_tag 'back_url', url_for(params), :id => nil %>
@@ -41,4 +41,3 @@
 </table>
 </div>
 <% end -%>
-<%#= render :partial => current_iteration %>

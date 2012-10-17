@@ -10,7 +10,7 @@
 	<center>
 		<h2>Current Iteration issues </h2>
 	</center>
-<%= link_to "Back to Issues List", issues_path %>
+
 	<hr/>
 	<table width=100%>
 	<tr bgcolor=#f4f4f4 width=100%>
@@ -33,9 +33,11 @@
 		<td align=center><%= issue.updated_on.to_date %></td>
 		<td align=center><%= link_to "update", edit_issue_path(issue.id) %></td>
 	</tr> 
+	<% @project1 = issue.project_id %>
 	<% end %>
 	<% end %>
 	</table>
 <hr/>
+<%= link_to "Back to issues list ", project_issues_path(@project1) %>
 </body>
 </html>

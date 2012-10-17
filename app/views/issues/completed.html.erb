@@ -9,7 +9,7 @@
 	<center>
 		<h2>Completed issues </h2>
 	</center>
-<%= link_to "Back to Issues List", issues_path %>
+
 	<hr/>
 	<table width=100%>
 	<tr bgcolor=#f4f4f4 width=100%>
@@ -31,9 +31,14 @@
 		<td align=center><%= link_to c.subject, issue_path(c.id) %></td>
 		<td align=center><%= c.updated_on.to_date %></td>
 	</tr>
-	
+	<% @project2 = c.project_id %>
 	<% end %>
 	</table>
 <hr/>
+<% if @project2 == "" %>
+
+<% else %>
+<%#= link_to "Back to Issues List", project_issues_path(@project2) %>
+<% end %>
 </body>
 </html>
