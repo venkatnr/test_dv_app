@@ -153,6 +153,12 @@ RedmineApp::Application.routes.draw do
      
   
   resources :projects do
+   resources :issues do
+   collection do
+	get 'current_iteration'
+	end
+	end
+
     member do
       get 'settings'
       post 'modules'
@@ -264,8 +270,9 @@ RedmineApp::Application.routes.draw do
     collection do
       match 'bulk_edit', :via => [:get, :post]
       post 'bulk_update'
-      post 'issue_addtask'
-       
+      get 'current_iteration'
+      get 'parking_garage'
+      get 'completed'
     end
     resources :time_entries, :controller => 'timelog' do
       collection do

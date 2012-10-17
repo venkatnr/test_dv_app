@@ -21,7 +21,7 @@ class ProjectsController < ApplicationController
   menu_item :settings, :only => :settings
 
   before_filter :find_project, :except => [ :index, :list, :new, :create, :copy ]
-  before_filter :authorize, :except => [ :index, :list, :new, :create, :copy, :archive, :unarchive, :destroy]
+  before_filter :authorize, :except => [ :index, :list, :new, :create, :copy, :archive, :unarchive, :destroy, :method]
   before_filter :authorize_global, :only => [:new, :create]
   before_filter :require_admin, :only => [ :copy, :archive, :unarchive, :destroy ]
   accept_rss_auth :index
@@ -244,6 +244,10 @@ class ProjectsController < ApplicationController
     # hide project in layout
     @project = nil
   end
+
+  def method
+   raise "inmy method".inspect
+  end 
 
   private
 

@@ -1,0 +1,39 @@
+<html>
+<head>
+<style>
+
+.trow1:hover { background: #f4f4f4; }
+</style>
+</head>
+<body>
+	<center>
+		<h2>Completed issues </h2>
+	</center>
+<%= link_to "Back to Issues List", issues_path %>
+	<hr/>
+	<table width=100%>
+	<tr bgcolor=#f4f4f4 width=100%>
+		<th>Id</th>
+		<th>Tracker</th>
+  		<th>Status</th>
+		<th>criority</th>
+		<th>Subject</th>
+		<th>Updated</th>
+		<th></th>
+	</tr>
+	<% @completed_issues.each do |c| %>
+	
+	<tr class="trow1">
+		<td class="td_ci" align=center><%= c.id %></td>
+		<td align=center><%= c.tracker %></td>
+		<td align=center><%= c.status %></td>
+		<td align=center><%= c.priority %></td>
+		<td align=center><%= link_to c.subject, issue_path(c.id) %></td>
+		<td align=center><%= c.updated_on.to_date %></td>
+	</tr>
+	
+	<% end %>
+	</table>
+<hr/>
+</body>
+</html>

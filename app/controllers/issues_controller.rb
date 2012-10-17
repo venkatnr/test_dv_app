@@ -22,7 +22,7 @@ class IssuesController < ApplicationController
   before_filter :find_issue, :only => [:show, :edit, :update]
   before_filter :find_issues, :only => [:bulk_edit, :bulk_update, :destroy]
   before_filter :find_project, :only => [:new, :create]
-  before_filter :authorize, :except => [:index]
+  before_filter :authorize, :except => [:index,:current_iteration,:parking_garage,:completed ]
   before_filter :find_optional_project, :only => [:index]
   before_filter :check_for_default_issue_status, :only => [:new, :create]
   before_filter :build_new_issue_from_params, :only => [:new, :create]
@@ -52,9 +52,19 @@ class IssuesController < ApplicationController
   helper :timelog
   helper :gantt
   include Redmine::Export::PDF
-    def issue_addtask
-	raise "yes".inspect
-    end
+   
+   def current_iteration
+   @issues = Issue.find(:all)
+  end 
+ 
+  def parking_garage
+   @parking_issues = Issue.find(:all, :conditions=>{:status_id => 1})
+  end 
+
+ def  completed
+  @completed_issues = Issue.find(:all, :conditions=>{:status_id => 5})
+  end 
+ 
 
   def index
     retrieve_query
