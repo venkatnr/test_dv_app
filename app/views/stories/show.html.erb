@@ -2,36 +2,16 @@
 <%= stylesheet_link_tag( 'pagination','style')%>
 <%= javascript_include_tag('jquery.min', 'jquery.tablesorter')%>
 <h2><%= link_to "All Iterations", project_path(@project)%> >> <%= link_to "All Stories",  project_iteration_path(@project.id, @iteration.id, @story.id )%> >> <%= @story.name %></h2>
-<table  >
-<tr>
-	<td>
-		Name:<%= @story.name %>
-	</td></tr>
-	<tr><td>
-		Type:<%= @story.Type %>
-	</td></tr>
-	<tr><td>
-		Description:<%= @story.disposition%>
-	</td></tr>
-	<tr><td>
-		Customer:<%= @story.customer %>
-	</td></tr>
-	<tr><td>
-		Tracker:<%= @story.tracker %>
-	</td></tr>
-	<tr><td>
-		Status:<%= @story.status %>
-	</td></tr>
-	<tr><td>
-		Priority:<%= @story.priority %>
-	</td></tr>
-	<tr><td>
-		Order:<%= @story.order %>
-	</td></tr>
-	<tr><td>
-		Estimated_hours:<%= @story.Estimated_hours %>
-	</td></tr>
-</tr>
+<table bgcolor=#f4f4f4>
+	<tr><td class="projectdetails">Name</td><td><%= @story.name %></td></tr>
+	<tr><td class="projectdetails">	Type</td><td><%= @story.Type %></td></tr>
+	<tr><td class="projectdetails">	Description</td><td><%= @story.disposition%></td></tr>
+	<tr><td class="projectdetails">	Customer</td><td><%= @story.customer %></td></tr>
+	<tr><td class="projectdetails">	Tracker</td><td><%= @story.tracker %></td></tr>
+	<tr><td class="projectdetails">	Status</td><td><%= @story.status %></td></tr>
+	<tr><td class="projectdetails">	Priority</td><td><%= @story.priority %></td></tr>
+	<tr><td class="projectdetails">	Order</td><td><%= @story.order %></td></tr>
+	<tr><td class="projectdetails">	Estimated_hours</td><td><%= @story.Estimated_hours %></td></tr>
 </table>
 <h3>ALL TASKS</h3>
 	<table id="myTable" class="tablesorter">
@@ -96,4 +76,7 @@ $(document).ready(function()
     } 
 );  
 </script>
+<style>
+.projectdetails{background-color: #8DBDD8;}
+</style>
 </html>
