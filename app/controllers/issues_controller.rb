@@ -101,7 +101,7 @@ class IssuesController < ApplicationController
   rescue ActiveRecord::RecordNotFound
     render_404
   end
-
+  
   def show
 	@iteration = Iteration.find(:all, :select => :id, :conditions => {:project_id => @project.id}).first
 	@storyid = Story.find(:all, :select => :id, :conditions => {:issue_id => @issue.id}).first
@@ -190,6 +190,8 @@ class IssuesController < ApplicationController
     end
   end
   
+
+
 
   def update
     return unless update_issue_from_params

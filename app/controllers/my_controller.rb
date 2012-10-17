@@ -206,6 +206,19 @@ end
     render :nothing => true
   end
 
+
+   def current_iteration
+   @issues = Issue.find(:all)
+  end 
+ 
+  def parking_garage
+   @parking_issues = Issue.find(:all, :conditions=>{:status_id => 1})
+  end 
+
+ def  completed
+  @completed_issues = Issue.find(:all, :conditions=>{:status_id => 5})
+  end 
+ 
 def reports
 
 end

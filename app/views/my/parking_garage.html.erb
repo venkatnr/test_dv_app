@@ -1,0 +1,40 @@
+<html>
+<head>
+<style>
+
+.trow1:hover { background: #d7d7d7; }
+</style>
+</head>
+<body>
+	<center>
+		<h2>Parking Garage issues </h2>
+	</center>
+<%= link_to "Back to Issues List", issues_path %>
+	<hr/>
+	<table width=100%>
+	<tr bgcolor=#f4f4f4 width=100%>
+		<th>Id</th>
+		<th>Tracker</th>
+  		<th>Status</th>
+		<th>Priority</th>
+		<th>Subject</th>
+		<th>Updated</th>
+		<th></th>
+	</tr>
+	<% @parking_issues.each do |p| %>
+	
+	<tr class="trow1">
+		<td align=center><%= p.id %></td>
+		<td align=center><%= p.tracker %></td>
+		<td align=center><%= p.status %></td>
+		<td align=center><%= p.priority %></td>
+		<td align=center><%= link_to p.subject, issue_path(p.id) %></td>
+		<td align=center><%= p.updated_on.to_date %></td>
+		<td><%= link_to "update", edit_issue_path(p.id) %><%= link_to_if_authorized(l(:button_update), {:controller => 'issues', :action => 'edit', :id => p.id }, :onclick => 'showAndScrollTo("update", "notes"); return false;', :class => 'icon icon-edit', :accesskey => accesskey(:edit)) %></td>
+	</tr>
+	
+	<% end %>
+	</table>
+<hr/>
+</body>
+</html>

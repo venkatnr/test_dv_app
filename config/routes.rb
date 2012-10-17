@@ -20,6 +20,8 @@ RedmineApp::Application.routes.draw do
 
   resources :holidays
 
+
+
   resources :absences  do
    collection do
 	get 'holidays_calendar'
@@ -127,6 +129,9 @@ RedmineApp::Application.routes.draw do
   match 'my/logs', :controller => 'my', :action => 'logs', :via => [:get, :post]
   match 'my/issue', :controller => 'my', :action => 'issue', :via => [:get, :post]
   match 'my/add_issuetask', :controller => 'my', :action => 'add_issuetask', :via => [:put, :post]
+  match 'my/current_iteration', :controller => 'my', :action => 'current_iteration', :via => [:get, :post]
+  match 'my/parking_garage', :controller => 'my', :action => 'parking_garage', :via => [:get, :post]
+  match 'my/completed', :controller => 'my', :action => 'completed', :via => [:get, :post]
   resources :users  
    
   match 'users/:id/memberships/:membership_id', :to => 'users#edit_membership', :via => :put, :as => 'user_membership'
@@ -178,7 +183,9 @@ RedmineApp::Application.routes.draw do
     resource :enumerations, :controller => 'project_enumerations', :only => [:update, :destroy]
 
     match 'issues/:copy_from/copy', :to => 'issues#new'
+  # match 'issues/current_iteration', :to => 'issues#current_iteration'
     resources :issues, :only => [:index, :new, :create] do
+      
 	#get 'issue_tasks'
      resources :stories do
 	resources :tasks do
@@ -199,6 +206,7 @@ RedmineApp::Application.routes.draw do
     match 'issues/issue', :controller => 'issues', :action => 'issue', :via => [:put, :post]
     match 'issues/add_issuetask', :controller => 'issues', :action => 'add_issuetask', :via => [:put, :post]
      match 'issues/task', :controller => 'issues', :action => 'task', :via => [:put, :post]
+  #   match 'issues/current_iteration', :controller => 'issues', :action => 'current_iteration', :via => [:get, :post]
    # match 'issues/stories', :controller => 'issues', :action => 'task', :via => [:put, :post]
     resources :files, :only => [:index, :new, :create]
 
@@ -251,11 +259,13 @@ RedmineApp::Application.routes.draw do
   end
 
   resources :issues do
+ 
    resources :tasks
     collection do
       match 'bulk_edit', :via => [:get, :post]
       post 'bulk_update'
       post 'issue_addtask'
+       
     end
     resources :time_entries, :controller => 'timelog' do
       collection do
