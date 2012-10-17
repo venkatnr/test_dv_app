@@ -54,7 +54,7 @@ class IssuesController < ApplicationController
   include Redmine::Export::PDF
    
    def current_iteration
-	raise @project.inspect
+	
    @issues = Issue.find(:all)
   end 
  
