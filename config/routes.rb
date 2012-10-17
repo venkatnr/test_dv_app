@@ -27,9 +27,10 @@ RedmineApp::Application.routes.draw do
 	get 'holidays_calendar'
    end
  end 
-
+resources :effortreports
   get "effortreports/index"
   post "effortreports/reports"
+  get "effortreports/reports"
   get "reports/index"
 
 	  resources :tasks do

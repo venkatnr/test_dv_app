@@ -4,6 +4,6 @@ class EffortreportsController < ApplicationController
   end
 
   def reports
-  raise "yes".inspect
+  
   end
 end

@@ -54,6 +54,7 @@ class IssuesController < ApplicationController
   include Redmine::Export::PDF
    
    def current_iteration
+	raise @project.inspect
    @issues = Issue.find(:all)
   end 
  
@@ -70,7 +71,7 @@ class IssuesController < ApplicationController
     retrieve_query
     sort_init(@query.sort_criteria.empty? ? [['id', 'desc']] : @query.sort_criteria)
     sort_update(@query.sortable_columns)
-
+    
     if @query.valid?
       case params[:format]
       when 'csv', 'pdf'
