@@ -92,7 +92,7 @@ def update
 if @iteration.status == "Closed"
 raise "yes ".inspect
 end
-       render :action => "show"
+      redirect_to project_iteration_path(@project.id,@iteration.id)
    else
        render :action => "edit"
    end

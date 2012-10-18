@@ -29,6 +29,7 @@
 			<th>Description
 			</th>
 		</tr></thead><tbody>  
+		
 		<% @paginatestory.each do |ts| %>	
 		<% if ts.acceptor ==  User.current.lastname %> 
 			<tr  align="center" border = "1px">

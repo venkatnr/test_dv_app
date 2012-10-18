@@ -44,7 +44,7 @@ def update
     @story = @iteration.story.find(params[:id])
 	
     if @story.update_attributes(params[:story])
-        render :action => "show"
+        redirect_to project_iteration_story_path(@project.id,@iteration.id,@story.id)
     else
 		 render :action => "edit"
     end
