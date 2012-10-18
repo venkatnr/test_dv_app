@@ -59,7 +59,7 @@ class Issue < ActiveRecord::Base
   validates_length_of :subject, :maximum => 255
   validates_inclusion_of :done_ratio, :in => 0..100
   validates_numericality_of :estimated_hours, :allow_nil => true
-  validate :validate_issue
+  #validate :validate_issue
 
   scope :visible,
         lambda {|*args| { :include => :project,
