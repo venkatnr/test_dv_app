@@ -91,8 +91,9 @@ def edit
 end
 def completetask
 	@task_id = Task.find(params[:id])
-    @task_id.story_id #story id
-    @storyid = Story.find(:all, :conditions => {:id => @task_id.story_id })
+    	@task_id.story_id #story id
+   	 @storyid = Story.find(:all, :conditions => {:id => @task_id.story_id })
+	
     @storyid.each do |iterationid|
 		@itid = iterationid.iteration_id#iteration id
     end
@@ -101,6 +102,17 @@ def completetask
     @proejctid = projectid.project_id #project id
     end
 	@task_id.update_attribute("status", true)
+	@s_tasks = @storyid.first.tasks
+	@tasks_total =  @s_tasks.length
+	@i = 0
+	@s_tasks.each do |sts|
+	  if sts.status == 1
+           @i+=1
+	  end
+	 if @tasks_total = @i
+		flash[:notice] = "All tasks completed user story is completed "
+	 end 
+	end
 	redirect_to  project_iteration_story_tasks_path( @proejctid , @itid , @task_id.story_id , @task_id.id)
 end
 
