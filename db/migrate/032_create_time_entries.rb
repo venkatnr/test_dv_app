@@ -4,9 +4,9 @@ class CreateTimeEntries < ActiveRecord::Migration
       t.column :project_id,  :integer,  :null => false
       t.column :user_id,     :integer,  :null => false
       t.column :issue_id,    :integer
-      t.column :hours,       :float,    :null => false
+      t.column :hours,       :float,    :null => true
       t.column :comments,    :string,   :limit => 255
-      t.column :activity_id, :integer,  :null => false
+      t.column :activity_id, :integer,  :null => true
       t.column :spent_on,    :date,     :null => false
       t.column :tyear,       :integer,  :null => false
       t.column :tmonth,      :integer,  :null => false
