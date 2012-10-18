@@ -9,7 +9,10 @@
 	<center>
 		<h2>Parking Garage issues </h2>
 	</center>
-<%#= link_to "Back to Issues List", project_issues_path(@project.id) %>
+<% if @parking_garage == [] %>
+<% else %>
+<%= link_to "Back to Issues List", project_issues_path(@project_id) %>
+<% end %>
 	<hr/>
 	<table width=100%>
 	<tr bgcolor=#f4f4f4 width=100%>
@@ -21,7 +24,7 @@
 		<th>Updated</th>
 		<th></th>
 	</tr>
-	<% @parking_issues.each do |p| %>
+	<% @parking_garage.each do |p| %>
 	
 	<tr class="trow1">
 		<td align=center><%= p.id %></td>
@@ -32,10 +35,10 @@
 		<td align=center><%= p.updated_on.to_date %></td>
 		<td><%= link_to "update", edit_issue_path(p.id) %></td>
 	</tr>
-	<% @project3 = p.project_id %>
+	
 	<% end %>
 	</table>
 <hr/>
-<%= link_to "Back to issues list ", project_issues_path(@project3) %>
+<%#= link_to "Back to issues list ", project_issues_path(@project3) %>
 </body>
 </html>

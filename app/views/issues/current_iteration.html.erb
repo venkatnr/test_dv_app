@@ -10,7 +10,10 @@
 	<center>
 		<h2>Current Iteration issues </h2>
 	</center>
-
+<% if @issues == [] %>
+<% else %>
+<%= link_to "Back to Issues List", project_issues_path(@project_id) %>
+<% end %>
 	<hr/>
 	<table width=100%>
 	<tr bgcolor=#f4f4f4 width=100%>
@@ -23,7 +26,7 @@
 		<th></th>
 	</tr>
 	<% @issues.each do |issue| %>
-	<% if issue.status_id ==  2 %>
+	
 	<tr class="trow1">
 		<td align=center><%= issue.id %></td>
 		<td align=center><%= issue.tracker %></td>
@@ -33,11 +36,11 @@
 		<td align=center><%= issue.updated_on.to_date %></td>
 		<td align=center><%= link_to "update", edit_issue_path(issue.id) %></td>
 	</tr> 
-	<% @project1 = issue.project_id %>
+	
 	<% end %>
-	<% end %>
+	
 	</table>
 <hr/>
-<%= link_to "Back to issues list ", project_issues_path(@project1) %>
+
 </body>
 </html>

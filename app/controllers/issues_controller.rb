@@ -52,22 +52,10 @@ class IssuesController < ApplicationController
   helper :timelog
   helper :gantt
   include Redmine::Export::PDF
-   
-   def current_iteration
-	
-   @issues = Issue.find(:all)
-  end 
- 
-  def parking_garage
-   @parking_issues = Issue.find(:all, :conditions=>{:status_id => 1})
-  end 
 
- def  completed
-  @completed_issues = Issue.find(:all, :conditions=>{:status_id => 5})
-  end 
- 
 
   def index
+	#raise @project.inspect
     retrieve_query
     sort_init(@query.sort_criteria.empty? ? [['id', 'desc']] : @query.sort_criteria)
     sort_update(@query.sortable_columns)
@@ -112,7 +100,22 @@ class IssuesController < ApplicationController
   rescue ActiveRecord::RecordNotFound
     render_404
   end
-  
+    
+   def current_iteration
+   	@project_id = params[:project]
+	@issues = Issue.find(:all, :conditions=>{:project_id => @project_id, :status_id => 2})
+    end 
+ 
+  def parking_garage
+  	@project_id = params[:project]
+	@parking_garage = Issue.find(:all, :conditions=>{:project_id => @project_id, :status_id => 1})
+    end 
+
+ def  completed
+  	@project_id = params[:project]
+	@completed_issues = Issue.find(:all, :conditions=>{:project_id => @project_id, :status_id => 5})
+  end 
+ 
   def show
 	@iteration = Iteration.find(:all, :select => :id, :conditions => {:project_id => @project.id}).first
 	@storyid = Story.find(:all, :select => :id, :conditions => {:issue_id => @issue.id}).first
