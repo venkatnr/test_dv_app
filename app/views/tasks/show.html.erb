@@ -7,7 +7,7 @@
 	<tr><td class="projectdetails">Name:</td><td><%= @task.name %></td></tr>
 	<tr><td class="projectdetails">task_type</td><td><%= @task.task_type %></td></tr>
 	<tr><td class="projectdetails">disposition</td><td><%= @task.disposition %></td></tr>
-	<tr><td class="projectdetails">acceptor</td><td><%= @task.acceptor %></td></tr>
+	<!--<tr><td class="projectdetails">acceptor</td><td><%= @task.acceptor %></td></tr>-->
 	<tr><td class="projectdetails">estimated_hours</td><td><%= @task.estimated_hours %></td></tr>
 	<tr><td class="projectdetails">description</td><td><%= @task.description %></td></tr>
 </table>
@@ -16,14 +16,14 @@
 <% @logs = @task.logs.find(:all, :conditions => {:task_id => @task.id }) %>
 <tr>
 <th>Reported date </th>
-<th>Acceptor </th>
+<!--<th>Acceptor </th>-->
 <th>Description</th>
 <th>Spent hours </th>
 </tr>
 <% @logs.each do |log| %>
 <tr>
 <td><%= log.report_date %></td>
-<td><%= link_to @task.acceptor , "#" %></td>
+<!--<td><%= link_to @task.acceptor , "#" %></td>-->
 <td><%= log.description %></td>
 <td><%= log.spent_hours %></td>
 </tr>

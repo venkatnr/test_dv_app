@@ -38,24 +38,16 @@ def create
     @story = Story.find(params[:story_id])
     @task = @story.tasks.new(params[:task]) 
     @stid = @story.name
-    @it = Iteration.find(:all , :conditions => {:id => @story.iteration_id }) 
-    @it.each do |iname|  @iname = iname.name end 
-	
-	@user.each do |usr|
-		if @task.acceptor == usr.lastname
-		@usermail = usr
-		
-		end
-        end 
+    
 if @task.task_type == "leave" && @task.estimated_hours > 8 
  redirect_to  project_issues_path(@project) and return
  flash[:error] = "Leave is only 8 hrs to log per day"
 else
 	if @task.save
 		@tid = @task.id
-		
-               
-       #	 TaskMailer.task_creation(@usermail,@iname,@tid).deliver
+		@task.update_attribute("acceptor",User.current.lastname)
+                
+       #	 TaskMailer.task_creation(User.current.email,@iname,@tid).deliver
 	end
        #render :action => "show"
          	redirect_to project_iteration_story_path(@projectid.id, @iterationid.id, @storyid.id)

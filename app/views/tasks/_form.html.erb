@@ -14,8 +14,8 @@
     <td><%= f.select(:disposition, options_for_select(["Added", "Planned", "Carried Over", "Discovered" ])) %></td>
   </tr>
   <tr>
-    <td id="tdleft"><%= f.label :acceptor %></td>
-	<td><%= f.select :acceptor, User.find(:all, :conditions =>"lastname= Admin").collect{|p|[p.lastname]},  {:include_blank => 'select'} %></td></tr>
+    <td id="tdleft"><%#= f.label :acceptor %></td>
+	<td><%#= f.select :acceptor, User.find(:all, :conditions =>"lastname= Admin").collect{|p|[p.lastname]},  {:include_blank => 'select'} %></td></tr>
  <tr><td id="tdleft">
     <%= f.label :estimated_hours %></td>
 <script>

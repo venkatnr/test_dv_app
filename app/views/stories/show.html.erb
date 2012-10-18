@@ -22,14 +22,15 @@
 			</th>
 			<th>Disposition
 			</th>
-			<th>Acceptor	
-			</th>
+			<!--<th>Acceptor	
+			</th>-->
 			<th>Estimation Time
 			</th>
 			<th>Description
 			</th>
 		</tr></thead><tbody>  
-		<% @paginatestory.each do |ts| %>	 
+		<% @paginatestory.each do |ts| %>	
+		<% if ts.acceptor ==  User.current.lastname %> 
 			<tr  align="center" border = "1px">
 				<td >
 					<% pro = Project.find(params[:project_id]) %>
@@ -45,15 +46,17 @@
 				<td >
 					<%=  ts.disposition %>
 				</td>
-				<td >
+				<!--<td >
 					<%=  ts.acceptor %>
-				</td>
+				</td>-->
 				<td >
 					<%=  ts.estimated_hours.round(2) %>
 				</td>
 				<td >
 					<%=  ts.description %>
 				</td>
+			</tr>
+		<% end %>
 	     <% end %></tbody>  
 	 </table>
 <div class="pagination">
