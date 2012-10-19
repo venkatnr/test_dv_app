@@ -49,5 +49,13 @@ def update
 		 render :action => "edit"
     end
   end
-  
+  def deletestory
+ @project_id = params[:project_id]
+ @iteration_id = params[:iteration_id]
+ @story_id = params[:story_id]
+  @story = Story.find(@story_id)
+	#raise @story.inspect
+	@story.destroy
+		redirect_to project_iteration_path( @project_id,@iteration_id)
+  end
 end

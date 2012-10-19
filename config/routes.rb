@@ -173,10 +173,10 @@ resources :effortreports
 	 resources :iterations do 
 		collection do
 		    put :update_attribute_on_the_spot
-
+		   
 		  end
 		resources :stories do
-		
+			 get 'deletestory'
 			resources :attendance
 			
 		  resources :tasks do

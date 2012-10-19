@@ -1,4 +1,8 @@
 <html>
+<head>
+<%= javascript_include_tag :all %>
+
+</head>
 <%= stylesheet_link_tag( 'pagination','style')%>
 <%= javascript_include_tag('jquery.min', 'jquery.tablesorter')%>
  <h2><%= link_to "All Iterations", project_path(@project) %> >> <%= @iteration.name %></h2>
@@ -71,8 +75,10 @@
 			<th>Status</th>
 			<th>Priority</th>
 			<th>Order</th>
-			<th>Order-custome</th>
-			<th></th>
+
+			<th>Edit</th>
+			<th>Delete</th>
+
 		</tr>
 	</thead>
 	<tbody> 
@@ -102,11 +108,13 @@
 			<td >
 				<%=  link_to "Update", edit_project_iteration_story_path(@project.id, @iteration.id, st.id) %>
 			</td>
-			<td>
-				<%#= on_the_spot_edit st, :order_cust %>
-				<%= on_the_spot_edit st, :order_cust, :type => :textarea, :rows => 10, :columns => 55 %>
-			</td>	
+		
+			<td =>
+	<%= link_to 'Destroy', project_iteration_story_deletestory_path(@project.id, @iteration.id, st.id), :confirm => 'Are you sure?', :method => :delete  %>
+			</td>
+		
 		</tr>
+
 	<% end %>
 	</tbody> 
    </table>

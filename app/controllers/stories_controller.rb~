@@ -1,5 +1,5 @@
 class StoriesController < ApplicationController
-can_edit_on_the_spot
+
 
 def index
 @project = Project.find(params[:project_id])
@@ -49,5 +49,13 @@ def update
 		 render :action => "edit"
     end
   end
-  
+  def deletestory
+ @project_id = params[:project_id]
+ @iteration_id = params[:iteration_id]
+ @story_id = params[:story_id]
+  @story = Story.find(@story_id)
+	#raise @story.inspect
+	@story.destroy
+		redirect_to project_iteration_path(@project.id, @iteration.id)
+  end
 end
