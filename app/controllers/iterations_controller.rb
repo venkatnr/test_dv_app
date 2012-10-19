@@ -1,6 +1,6 @@
 class IterationsController < ApplicationController
 #before_filter :test, :except => [:index, :new, :edit, :show]
-
+can_edit_on_the_spot
 def test
 @project = Project.find(params[:project_id])	
 @new_params = params[:iteration]

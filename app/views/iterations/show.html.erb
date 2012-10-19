@@ -22,6 +22,7 @@
 					<th width ="100px">Status</th>
 					<th width ="100px">Priority</th>
 					<th width ="100px">Order</th>
+
 					<th width ="100px"></th>
 			
 				</tr></thead><tbody>  
@@ -51,7 +52,8 @@
 				</td>
 				<td width ="200px">
 					<%=  link_to "Update", edit_project_iteration_story_path(@project.id, @iteration.id, st.id) %>
-				</td>	
+				</td>
+				
 			</tr>
 		
 		<% end %>
@@ -69,6 +71,7 @@
 			<th>Status</th>
 			<th>Priority</th>
 			<th>Order</th>
+			<th>Order-custome</th>
 			<th></th>
 		</tr>
 	</thead>
@@ -99,6 +102,10 @@
 			<td >
 				<%=  link_to "Update", edit_project_iteration_story_path(@project.id, @iteration.id, st.id) %>
 			</td>
+			<td>
+				<%#= on_the_spot_edit st, :order_cust %>
+				<%= on_the_spot_edit st, :order_cust, :type => :textarea, :rows => 10, :columns => 55 %>
+			</td>	
 		</tr>
 	<% end %>
 	</tbody> 
@@ -121,8 +128,9 @@ $(document).ready(function()
         $("#myTable").tablesorter( {sortList: [[0,0], [1,0]]} ); 
     } 
 );  
+
 </script>
 <style>
-.projectdetails{background-color: #8DBDD8;}
+	.projectdetails{background-color: #8DBDD8;}
 </style>
 </html>
