@@ -159,6 +159,7 @@ resources :effortreports
 	get 'current_iteration'
 	get 'parking_garage'
 	get 'completed'
+	get 'issues'
 	end
 	end
 

@@ -164,35 +164,30 @@ class IssuesController < ApplicationController
   def create
     call_hook(:controller_issues_new_before_save, { :params => params, :issue => @issue })
     @issue.save_attachments(params[:attachments] || (params[:issue] && params[:issue][:uploads]))
-    if @issue.save
+    
       call_hook(:controller_issues_new_after_save, { :params => params, :issue => @issue})
 	if @issue.status_id == 2
 		@iter = @project.iteration.find(:all, :conditions => {:status => "Open"})
 		#raise @iter.inspect
+			if @iter == [] || @iter == nil
+			flash[:notice] = "No Open Iterations are in this project"
+			 render :action => 'new' and return
+			else
+			@issue.save
 			@iter.each do |it|
 					@issue.stories.create(:name => @issue.subject , :issue_id => @issue.id, :Estimated_hours => @issue.estimated_hours)
 					@it_id = Story.find(:all , :conditions => {:issue_id => @issue.id})
 					@it_id.each do | it_one|
 					it_one.update_attribute("iteration_id" , it.id)
 					 end 
+				end
+			redirect_to project_issue_path(@project,@issue)
 			end
+	elsif @issue.status_id == 1	
+	@issue.save 
+	redirect_to project_issue_path(@project,@issue)
 	end
-      respond_to do |format|
-        format.html {
-          render_attachment_warning_if_needed(@issue)
-          flash[:notice] = l(:notice_issue_successful_create, :id => "<a href='#{issue_path(@issue)}'>##{@issue.id}</a>")
-          redirect_to(params[:continue] ?  { :action => 'new', :project_id => @issue.project, :issue => {:tracker_id => @issue.tracker, :parent_issue_id => @issue.parent_issue_id}.reject {|k,v| v.nil?} } :
-                      { :action => 'show', :id => @issue })
-        }
-        format.api  { render :action => 'show', :status => :created, :location => issue_url(@issue) }
-      end
-      return
-    else
-      respond_to do |format|
-        format.html { render :action => 'new' }
-        format.api  { render_validation_errors(@issue) }
-      end
-    end
+      
   end
 
   def edit
