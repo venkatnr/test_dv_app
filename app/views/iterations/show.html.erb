@@ -13,7 +13,7 @@
 	<tr><td class="projectdetails">Start_date</td><td> <%= @iteration.start_date %></td></tr>
 	<tr><td class="projectdetails">End_date</td><td> <%= @iteration.end_date %></td></tr>
 	<tr><td class="projectdetails">Status</td><td><%= @iteration.status %></td></tr>
-	<tr><td class="projectdetails">Description</td><td> <%=h truncate( @iteration.description, :length => 15) %></td></tr>
+	<tr><td class="projectdetails">Description</td><td> <%= @iteration.description %></td></tr>
 </table>
 <hr/>
 <% if @project.name == "Abseence data" %>
