@@ -146,6 +146,7 @@ resources :effortreports
   match 'watchers/watch', :controller=> 'watchers', :action => 'watch', :via => :post
   match 'watchers/unwatch', :controller=> 'watchers', :action => 'unwatch', :via => :post
   match 'watchers/autocomplete_for_user', :controller=> 'watchers', :action => 'autocomplete_for_user', :via => :get
+  
 
   match 'projects/:id/settings/:tab', :to => "projects#settings"
   
@@ -160,6 +161,7 @@ resources :effortreports
 	get 'parking_garage'
 	get 'completed'
 	get 'issues'
+	get 'user_access'
 	end
 	end
 

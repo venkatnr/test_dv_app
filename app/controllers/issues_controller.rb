@@ -23,6 +23,7 @@ class IssuesController < ApplicationController
   before_filter :find_issues, :only => [:bulk_edit, :bulk_update, :destroy]
   before_filter :find_project, :only => [:new, :create]
   before_filter :authorize, :except => [:index,:current_iteration,:parking_garage,:completed ]
+  before_filter :user_access, :only => [:create]
   before_filter :find_optional_project, :only => [:index]
   before_filter :check_for_default_issue_status, :only => [:new, :create]
   before_filter :build_new_issue_from_params, :only => [:new, :create]
@@ -116,6 +117,12 @@ class IssuesController < ApplicationController
 	@completed_issues = Issue.find(:all, :conditions=>{:project_id => @project_id, :status_id => 5})
   end 
  
+  def user_access
+if  !User.current.admin
+flash[:notice] = "No Rights"
+redirect_to home_path
+end
+end
   def show
 	@iteration = Iteration.find(:all, :select => :id, :conditions => {:project_id => @project.id}).first
 	@storyid = Story.find(:all, :select => :id, :conditions => {:issue_id => @issue.id}).first
@@ -183,8 +190,11 @@ class IssuesController < ApplicationController
 				end
 			redirect_to project_issue_path(@project,@issue)
 			end
-	elsif @issue.status_id == 1	
+	elsif @issue.status_id == 1
 	@issue.save 
+	@story = Story.create(:name => @issue.subject , :issue_id => @issue.id, :Estimated_hours => @issue.estimated_hours)
+	 @story.save	
+	 @story.update_attribute("issue_id", @issue.id) 
 	redirect_to project_issue_path(@project,@issue)
 	end
       
@@ -207,7 +217,7 @@ class IssuesController < ApplicationController
     @issue.save_attachments(params[:attachments] || (params[:issue] && params[:issue][:uploads]))
     saved = false
     begin
-     
+	
 	if @issue.status_id == 2
 	@iter = @project.iteration.find(:all, :conditions => {:status => "Open"})
        # raise @project.id.inspect
@@ -215,12 +225,18 @@ class IssuesController < ApplicationController
 		flash[:error] = "No open iterations in this project"
                  redirect_to project_issues_path(@project.id) and return
 		end
+ 		@stories = Story.find(:all,:conditions=>{:issue_id => @issue.id}).first
+		if @stories != [] || @stories != ""
+		@iter = @project.iteration.find(:all, :conditions => {:status => "Open"}).first
+		@stories.update_attribute("iteration_id", @iter.id)
+		else
 		@iter.each do |it|
 				@issue.stories.create(:name => @issue.subject , :issue_id => @issue.id, :Estimated_hours => @issue.estimated_hours)
 				@it_id = Story.find(:all , :conditions => {:issue_id => @issue.id})
 			        @it_id.each do | it_one|
 			        it_one.update_attribute("iteration_id" , it.id)
 				 end 
+			   end
 		end
 	end
 	 saved = @issue.save_issue_with_child_records(params, @time_entry)

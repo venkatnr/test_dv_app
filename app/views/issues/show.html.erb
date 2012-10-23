@@ -90,15 +90,11 @@
 <div class="contextual">
 <% @issue = Issue.find(params[:id]) %>
 <% @issue.id %>
-<% @story = Story.where(:issue_id => @issue.id) %>
-<% @story.each do | st | %>
-<% @story_id = st.id.inspect %>
-<% end %> 
-<% if @story_id == NIL %>
- No stories to add task
-<% else %>
+<% @stories = Story.find(:all,:conditions=>{:issue_id => @issue.id}).first %>
+
+<%@story_id = @stories.id%>
   <%= link_to "Add Task" ,issue_tasks_project_issue_story_tasks_path(@project.id,@issue.id,@story_id)%>
-<% end %>
+
 </div>
 <p><strong><%=l(:label_subtask_plural)%></strong></p>
 <%= render_descendants_tree(@issue) unless @issue.leaf? %>

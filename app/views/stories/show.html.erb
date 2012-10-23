@@ -50,8 +50,12 @@
 				<!--<td >
 					<%=  ts.acceptor %>
 				</td>-->
-				<td >
+				<td >	
+					<% if ts.estimated_hours == "" || ts.estimated_hours == nil %>
+					<%=  ts.estimated_hours %>
+					<% else %>
 					<%=  ts.estimated_hours.round(2) %>
+					<% end %>
 				</td>
 				<td >
 					<%=  ts.description %>

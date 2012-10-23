@@ -815,6 +815,7 @@ class Issue < ActiveRecord::Base
     Project.all(:conditions => Project.allowed_to_condition(user, :move_issues))
   end
 
+
   private
 
   def after_project_change
