@@ -4,7 +4,7 @@
 
 production:
   adapter: mysql
-  database: mydb_vtool
+  database: redmine_development
   host: localhost
   username: root
   password: 
