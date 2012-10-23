@@ -92,7 +92,10 @@
 				Status
 			</th>	
 			<th>
-				
+				Edit
+			</th>
+			<th>
+				Destroy
 			</th>
 		</tr>
 	</thead> 
@@ -135,6 +138,7 @@
 					<%= it.status %>
 				</td>
   				<td><%= link_to "edit", edit_project_iteration_path(@project.id, it.id) %></td>
+				<td><%= link_to "Destroy",   deleteiteration_project_iteration_path(@project.id, it.id), :confirm => 'Are you sure?', :method => :delete  %> </td>
 			</tr>
 		<%end%>
 		<% end %>

@@ -105,12 +105,12 @@ def show
     @iterations = Iteration.find(:all)
     render :action => "show"
 end
-def destroy
-    @project = Project.find(params[:project_id])
-    @iteration = @project.iteration.find(params[:id])
-    @iterationpagination = @iteration.story
-    @iterationpagination.destroy
-	render :action => "show"
-
+def deleteiteration
+	#raise params.inspect
+    @project_id = params[:project_id]
+    @iteration_id = params[:id]
+   @iteration = Iteration.find(@iteration_id)
+	 @iteration.destroy
+   redirect_to project_path(@project_id)
 end
 end
