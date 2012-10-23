@@ -9,6 +9,7 @@ gem "builder"
 gem "mysql"
 gem "cancan"
 gem "will_paginate", "~> 3.0.3"
+gem "on_the_spot"
 #gem 'client_side_validations'
 gem 'event-calendar', :require => 'event_calendar'
 

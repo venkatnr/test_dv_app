@@ -111,6 +111,6 @@ def destroy
     @iterationpagination = @iteration.story
     @iterationpagination.destroy
 	render :action => "show"
-
+end
 end
 end

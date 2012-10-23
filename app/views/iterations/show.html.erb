@@ -1,4 +1,8 @@
 <html>
+<head>
+<%= javascript_include_tag :all %>
+
+</head>
 <%= stylesheet_link_tag( 'pagination','style')%>
 <%= javascript_include_tag('jquery.min', 'jquery.tablesorter')%>
  <h2><%= link_to "All Iterations", project_path(@project) %> >> <%= @iteration.name %></h2>
@@ -22,6 +26,7 @@
 					<th width ="100px">Status</th>
 					<th width ="100px">Priority</th>
 					<th width ="100px">Order</th>
+
 					<th width ="100px"></th>
 			
 				</tr></thead><tbody>  
@@ -51,7 +56,8 @@
 				</td>
 				<td width ="200px">
 					<%=  link_to "Update", edit_project_iteration_story_path(@project.id, @iteration.id, st.id) %>
-				</td>	
+				</td>
+				
 			</tr>
 		
 		<% end %>
@@ -69,7 +75,10 @@
 			<th>Status</th>
 			<th>Priority</th>
 			<th>Order</th>
-			<th></th>
+
+			<th>Edit</th>
+			<th>Delete</th>
+
 		</tr>
 	</thead>
 	<tbody> 
@@ -99,7 +108,13 @@
 			<td >
 				<%=  link_to "Update", edit_project_iteration_story_path(@project.id, @iteration.id, st.id) %>
 			</td>
+		
+			<td =>
+	<%= link_to 'Destroy', project_iteration_story_deletestory_path(@project.id, @iteration.id, st.id), :confirm => 'Are you sure?', :method => :delete  %>
+			</td>
+		
 		</tr>
+
 	<% end %>
 	</tbody> 
    </table>
@@ -121,8 +136,9 @@ $(document).ready(function()
         $("#myTable").tablesorter( {sortList: [[0,0], [1,0]]} ); 
     } 
 );  
+
 </script>
 <style>
-.projectdetails{background-color: #8DBDD8;}
+	.projectdetails{background-color: #8DBDD8;}
 </style>
 </html>
