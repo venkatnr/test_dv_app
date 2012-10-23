@@ -50,7 +50,7 @@ text-align :center;
 <%= form_tag( logs_tasks_path, :method => :post) do %>
 <% @tasks = Task.find(:all, :conditions => {:acceptor => User.current.lastname}) %>
 <br/>
-<% if @tasks == [] || @tasks == "" || @tasks == nill %>
+<% if @tasks == [] || @tasks == "" || @tasks == nil %>
 <b>No Tasks are assigned to you under any project</b>
 <% else %>
 <span id = "textfordate">Select date:</span> <%= text_field_tag 'gettingdate' ,nil, :onchange=> "myFunction();" , :required => true%>
@@ -106,7 +106,10 @@ text-align :center;
 
 <%end%>
 </table>
+<% if @tasks == [] || @tasks == "" || @tasks == nil %>
+<% else %>
 <%= submit_tag('log')%> 
+<% end %>
 <% end %> 
 
 <script>
