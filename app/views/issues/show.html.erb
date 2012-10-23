@@ -90,9 +90,10 @@
 <div class="contextual">
 <% @issue = Issue.find(params[:id]) %>
 <% @issue.id %>
-<% @stories = Story.find(:all,:conditions=>{:issue_id => @issue.id}).first %>
-
-<%@story_id = @stories.id%>
+<% @stories = Story.find(:all,:conditions=>{:issue_id => @issue.id}) %>
+<% @stories.each do |st| %>
+<% @story_id = st.id %>
+<% end %>
   <%= link_to "Add Task" ,issue_tasks_project_issue_story_tasks_path(@project.id,@issue.id,@story_id)%>
 
 </div>

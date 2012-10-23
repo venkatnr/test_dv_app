@@ -109,8 +109,11 @@
 				<%=  link_to "Update", edit_project_iteration_story_path(@project.id, @iteration.id, st.id) %>
 			</td>
 		
-			<td >
-	<%= link_to 'Destroy', project_iteration_story_deletestory_path(@project.id, @iteration.id, st.id), :confirm => 'Are you sure?', :method => :deletestory  %>
+			<td =>
+	<%if User.current.admin? %>
+	<%= link_to 'Destroy', project_iteration_story_deletestory_path(@project.id, @iteration.id, st.id), :confirm => 'Are you sure?', :method => :delete  %>
+	<% else %>
+	<% end %>
 			</td>
 		
 		</tr>
