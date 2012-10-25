@@ -45,8 +45,10 @@ class MyController < ApplicationController
 
  def week_mail
   @user = User.current.id 
+	@today = Date.today
 	TaskMailer.weekly_mail(@user).deliver
-      render :text => "mail sent"
+	flash[:notice] = "email sent suceessfully"
+       redirect_to my_page_path
  end
   # Show user's page
   def page
