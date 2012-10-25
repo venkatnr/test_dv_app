@@ -1,0 +1,45 @@
+<html>
+<body bgcolor ="gray">
+<center>
+<b><font color ="green"> Visper Tool Weekly Status Mail </font></b>
+</center>
+<hr/>
+<%= @user_mail.lastname.capitalize %><br/>
+<hr/>
+<% @today = Date.today %>
+<% @from_date = 0 %>
+<% @week_day = @today.strftime("%A") %>
+<% if @week_day == "Friday" %>
+<% @from_date = (@today.to_date - 5.days) %>
+<% else %>
+<% i = 1 %>
+	<% for i in i..8 %>
+	<% @from_date1 = @today.to_date - i.days %>
+	<% i+=1%>
+		<% if @from_date1.strftime("%A") == "Friday" %>
+		   <% @from_date = @from_date1 %>
+		<% end %>
+	<% end %>
+<% end %>
+From <%= @from_date %> to <%= @today %> <br/>
+<% @total_hours = 0 %>
+<% @tasks = Task.find(:all,:conditions=>{:acceptor => User.current.lastname}) %>
+<% @tasks.each do |ts| %>
+	<% ts.logs.each do |log| %>
+		<% if log.report_date >= @from_date and log.report_date <= @today %>
+		On <%= log.report_date %> your worked <%= log.spent_hours %>hrs on "<%= ts.name %> "  <br/>     
+		<% @total_hours = @total_hours + log.spent_hours %>                                     
+		<% end %>
+	<% end %>
+<% end %>
+<hr/>
+Your log hours for this week is only <%= @total_hours %><br/>
+This week your time efforts are <%= 40.0 - @total_hours.to_f %>hrs in lack<br/>
+Make sure your logged hours should be 40 hours 
+<hr/>
+
+<b><font color="blue">Thanks</font></b><br/>
+<b><font color="blue">Logicmatter Vispertool Team</font></b><br/>
+
+</body>
+</html>
