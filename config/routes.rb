@@ -184,7 +184,7 @@ resources :effortreports
 		
 		resources :stories do
 			 
-				get 'deletestory'
+			get 'deletestory'
 		
 			resources :attendance
 			
