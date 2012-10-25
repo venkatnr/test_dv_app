@@ -6,7 +6,7 @@ def task_creation(usermail,iname,tid)
 @task_name = tid
 @task = Task.find(:all , :conditions => {:id => @task_name })
 
-    mail(:to =>@task_acceptor.mail, :subject => "Task", :from => "redmine.logicmatter@gmail.com")
+    mail(:to =>@task_acceptor, :subject => "Task", :from => "redmine.logicmatter@gmail.com")
   end
 
 def task_update(usermail,tid,week)

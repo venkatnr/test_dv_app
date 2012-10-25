@@ -118,7 +118,7 @@
 				<td width ="100px" style="background-color: #8DBDD8;" >	
 					<%= it.status %>
 				</td>
-  				<td style="background-color: #8DBDD8;" ><%= link_to "edit", edit_project_iteration_path(@project.id, it.id) %></td>
+  				<td style="background-color: #8DBDD8;" ><%= link_to "edit", edit_project_iteration_path(@project.id, it.id), :confirm => 'Are you sure?', :method => :edit %></td>
 				<td style="background-color: #8DBDD8;"><%= link_to "Destroy", deleteiteration_project_iteration_path(@project.id, it.id), :confirm => 'Are you sure?', :method => :delete  %> </td>
 			</tr>
 		  	<%else%>
@@ -138,8 +138,8 @@
 				<td width ="250px">	
 					<%= it.status %>
 				</td>
-  				<td width ="100px" > <%= link_to "edit", edit_project_iteration_path(@project.id, it.id) %></td>
-				<td width ="100px" ><%= link_to "Destroy", deleteiteration_project_iteration_path(@project.id, it.id), :confirm => 'Are you sure?', :method => :delete  %> </td>
+  				<td width ="100px" > <%= link_to "edit", edit_project_iteration_path(@project.id, it.id), :confirm => 'Are you sure?', :method => :edit %></td>
+				<td width ="100px" ><%= link_to "Destroy", deleteiteration_project_iteration_path(@project.id, it.id), :confirm => 'Are you sure?', :method => :delete %> </td>
 			</tr>
 		<%end%>
 		<% end %>
