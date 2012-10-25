@@ -2,7 +2,7 @@
 <html>
 <body>
 <center>
-<h2>Time sheet</h2>
+<h2>Time sheet<h2>
 </center>
 <hr/>
 <p>From <%= @start %> to <%= @end %></p>
