@@ -133,6 +133,7 @@ resources :effortreports
   match 'my/current_iteration', :controller => 'my', :action => 'current_iteration', :via => [:get, :post]
   match 'my/parking_garage', :controller => 'my', :action => 'parking_garage', :via => [:get, :post]
   match 'my/completed', :controller => 'my', :action => 'completed', :via => [:get, :post]
+  match 'my/week_mail', :controller => 'my', :action => 'week_mail', :via => [:get, :post]
   resources :users  
    
   match 'users/:id/memberships/:membership_id', :to => 'users#edit_membership', :via => :put, :as => 'user_membership'

@@ -41,6 +41,13 @@ class MyController < ApplicationController
     
   end
 
+
+
+ def week_mail
+  @user = User.current.id 
+	TaskMailer.weekly_mail(@user).deliver
+      render :text => "mail sent"
+ end
   # Show user's page
   def page
 $date = Time.now

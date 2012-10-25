@@ -47,7 +47,7 @@ else
 		@tid = @task.id
 		@task.update_attribute("acceptor",User.current.lastname)
                 
-       #	 TaskMailer.task_creation(User.current.email,@iname,@tid).deliver
+       TaskMailer.task_creation.deliver
 	end
        #render :action => "show"
          	redirect_to project_iteration_story_path(@projectid.id, @iterationid.id, @storyid.id)
