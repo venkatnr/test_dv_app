@@ -183,7 +183,9 @@ resources :effortreports
 		end
 		
 		resources :stories do
-			 get 'deletestory'
+			 
+				get 'deletestory'
+		
 			resources :attendance
 			
 		  resources :tasks do
