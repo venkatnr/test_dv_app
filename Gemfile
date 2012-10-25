@@ -12,7 +12,7 @@ gem "will_paginate", "~> 3.0.3"
 gem "on_the_spot"
 #gem 'client_side_validations'
 gem 'event-calendar', :require => 'event_calendar'
-
+gem 'pdfkit'
 # Optional gem for LDAP authentication
 group :ldap do
   gem "net-ldap", "~> 0.3.1"

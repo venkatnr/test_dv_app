@@ -133,6 +133,6 @@ Time sheet
 
 <p>
   Download:
- 
-  <%= link_to "In Excel Sheet", my_mytimesheet_path(format: "xls") %>
+   <%= link_to "In Excel Sheet", my_mytimesheet_path(format: "xls") %> <p id="pdf_link"><%= link_to "PDF", my_mytimesheet_path(@mytimesheet, :format => "pdf") %></p>
+
 </p>
