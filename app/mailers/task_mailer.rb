@@ -18,10 +18,13 @@ def task_update(usermail,tid,week)
 
     mail(:to =>@task_acceptor.mail, :subject => "Task", :from => "redmine.logicmatter@gmail.com")
   end  
-def weekly_mail
-@task_acceptor = "sriram.in20@gmail.com"
+def weekly_mail(user)
+@user = user
+@user_mail = User.find(@user)
+@today = Date.today
+@tasks = Task.find(:all, :conditions => {:acceptor => @user_mail.lastname })
 
-   mail(:to =>"sriram.in20@gmail.com", :subject => "Task", :from => "redmine.logicmatter@gmail.com")
+mail(:to =>@user_mail.mail, :subject => "Task", :from => "redmine.logicmatter@gmail.com")
 end
 
 end
