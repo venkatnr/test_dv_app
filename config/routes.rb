@@ -172,11 +172,15 @@ resources :effortreports
       post 'unarchive'
       match 'copy', :via => [:get, :post]
     end
-	 resources :iterations do 
+	 resources :iterations do
+		 
 		collection do
-		    put :update_attribute_on_the_spot
-		   
+		    put :update_attribute_on_the_spot	
 		  end
+		member do
+		 get 'deleteiteration'
+		end
+		
 		resources :stories do
 			 get 'deletestory'
 			resources :attendance

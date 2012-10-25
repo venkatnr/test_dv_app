@@ -11,6 +11,7 @@
 <h2><%=l(:label_overview)%></h2>
 <%#= javascript_include_tag('RGraph.bar', 'RGraph.common.core')%>
 <body>
+
 <table border="1" width="800" class="test_border">
   <tr>
     <td width="250">
@@ -91,7 +92,10 @@
 				Status
 			</th>	
 			<th>
-				
+				Edit
+			</th>
+			<th>
+				Destroy
 			</th>
 		</tr>
 	</thead> 
@@ -134,6 +138,7 @@
 					<%= it.status %>
 				</td>
   				<td><%= link_to "edit", edit_project_iteration_path(@project.id, it.id) %></td>
+				<td><%= link_to "Destroy",   deleteiteration_project_iteration_path(@project_.d, it.id), :confirm => 'Are you sure?', :method => :delete  %> </td>
 			</tr>
 		<%end%>
 		<% end %>
