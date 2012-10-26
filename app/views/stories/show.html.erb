@@ -75,7 +75,7 @@
 <% if @project.name == "Abseence data" %>
 <%= link_to "Leave", new_project_iteration_story_attendance_path(@project.id,@iteration.id,@story.id)%>
 <%else %>
-<%= link_to "create Task" , new_project_iteration_story_task_path(@project.id, @iteration.id,@story.id) %>
+<%= link_to "Create Task" , new_project_iteration_story_task_path(@project.id, @iteration.id,@story.id), :id => "buttonstyle" %>
 <% end %>
 <% end %>
 <script>
