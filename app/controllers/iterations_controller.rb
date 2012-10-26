@@ -119,9 +119,8 @@ end
 def deleteiteration
     @project_id = params[:project_id]
     @it_id = params[:id]
-    @story_id = params[:id]
-   @story = Story.find(@story_id)
-   @story.destroy
-   redirect_to project_iteration_path(@project_id)
+   @iteration = Iteration.find(@it_id )
+   @iteration.destroy
+   redirect_to project_path(@project_id)
 end
 end
