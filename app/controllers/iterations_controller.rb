@@ -117,13 +117,11 @@ def show
     render :action => "show"
 end
 def deleteiteration
-	#raise params.inspect
     @project_id = params[:project_id]
     @it_id = params[:id]
-    @story_id = params[:format]
+    @story_id = params[:id]
    @story = Story.find(@story_id)
-	
    @story.destroy
-   redirect_to project_iteration_path(@project_id,)
+   redirect_to project_iteration_path(@project_id)
 end
 end
