@@ -1,6 +1,6 @@
 class StoriesController < ApplicationController
 
-
+before_filter :access_stories, :only => [:create]
 def index
 @project = Project.find(params[:project_id])
   @iteration = Iteration.find(params[:iteration_id])
