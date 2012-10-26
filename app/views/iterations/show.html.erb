@@ -130,7 +130,7 @@
 <%if User.current.admin? %>
 	<% if @project.name == "Abseence data" %>
 	<% else %>
-		<%= link_to "create story" , new_project_iteration_story_path(@project.id, @iteration.id) %>
+		<%= link_to "create story" , new_project_iteration_story_path(@project.id, @iteration.id), :id => "buttonstyle" %>
 	<% end %>
 <%end %>
 <script>

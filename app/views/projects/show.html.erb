@@ -118,8 +118,12 @@
 				<td width ="100px" style="background-color: #8DBDD8;" >	
 					<%= it.status %>
 				</td>
-  				<td style="background-color: #8DBDD8;" ><%= link_to "edit", edit_project_iteration_path(@project.id, it.id), :confirm => 'Are you sure?', :method => :edit %></td>
-				<td style="background-color: #8DBDD8;"><%= link_to "Destroy", deleteiteration_project_iteration_path(@project.id, it.id), :confirm => 'Are you sure?', :method => :delete  %> </td>
+  				<td style="background-color: #8DBDD8;" >
+  					<%= link_to "edit", edit_project_iteration_path(@project.id, it.id), :confirm => 'Are you sure?', :method => :edit %>
+  				</td>
+				<td style="background-color: #8DBDD8;">
+					<%= link_to "Destroy", deleteiteration_project_iteration_path(@project.id, it.id), :confirm => 'Are you sure?', :method => :delete  %> 
+				</td>
 			</tr>
 		  	<%else%>
 			<tr width="900px" align="center"  >
@@ -150,7 +154,7 @@
 	<%= will_paginate @iterations, :container => false, :page_links => true %>
 </div>
 <%if User.current.admin?  %>
-	<%= link_to "New Iteration",  new_project_iteration_path(@project.id) %>
+	<%= link_to "New Iteration",  new_project_iteration_path(@project.id), :id => "buttonstyle" %>
 <%end %>
 
 </body>
@@ -177,6 +181,7 @@ $(document).ready(function()
     .test_border{
 			width: 100%;
 		}
+
 
 
 	</style>

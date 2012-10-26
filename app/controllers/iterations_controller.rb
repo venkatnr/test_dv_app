@@ -1,25 +1,25 @@
 class IterationsController < ApplicationController
 #before_filter :test, :except => [:index, :new, :edit, :show]
-before_filter :access_iteration, :only => [:create]
+before_filter :access_iteration, :only => [:create,:deleteiteration, :edit ]
 can_edit_on_the_spot
 def test
-@project = Project.find(params[:project_id])	
-@new_params = params[:iteration]
-raise @new_params.each_value { |key| puts "#{key}" }.inspect
-flag = 0
-@project.iteration.each do |it|
-@endd = it.end_date
-if @enddate < @endd
-flag += 1
-else
-flag = 0
-end
-end
-if flag == 0
-redirect_to "create"
-else
-raise "you selecting date is already there".inspect
-end
+	@project = Project.find(params[:project_id])	
+	@new_params = params[:iteration]
+	raise @new_params.each_value { |key| puts "#{key}" }.inspect
+	flag = 0
+	@project.iteration.each do |it|
+	@endd = it.end_date
+	if @enddate < @endd
+	flag += 1
+	else
+	flag = 0
+	end
+	end
+	if flag == 0
+	redirect_to "create"
+	else
+	raise "you selecting date is already there".inspect
+	end
 end
 
 def index
@@ -40,9 +40,10 @@ end
 
 
  def access_iteration
+ 	@project = Project.find(params[:project_id])
 	if  !User.current.admin
-	flash[:notice] = "Not an authorised user to create an iteration"
-	redirect_to home_path
+	flash[:notice] = "Not an authorised user to create/modify/delete an iteration"
+	redirect_to project_path(@project.id)
 	end
  end
 
