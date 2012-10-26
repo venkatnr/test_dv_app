@@ -250,7 +250,8 @@ def mytimesheet
 @start = params[:start_date]
 @end = params[:end_date]
 @user = User.current.lastname
-
+@tasks_new = Task.find(:all,:conditions=>{:acceptor=>@user})
+#@tasks = @tasks_new.paginate(:page => params[:page], :per_page => 1)
 respond_to do |format|
 
 	      format.html

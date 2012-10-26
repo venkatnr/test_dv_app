@@ -1,23 +1,23 @@
-
 <html>
+<%= stylesheet_link_tag('pagination', 'style')%>
+<%= javascript_include_tag('jquery.min', 'jquery.tablesorter')%>
 <body>
 <center>
-<h2>Time sheet</h2>
+<h2>Time sheet (<%= @start %>) To (<%= @end %>) </h2>
 </center>
-<hr/>
-<p>From <%= @start %> to <%= @end %></p>
 <% @total_time = 0 %>
 
-<table width=100%>
-	<tr bgcolor= #D3D8D8>
-		<th width=10%>Date</th>
-		<th  width=10%>Project</th>
-		<th  width=10%>Iteration</th>
-		<th  width=10%>Story</th>
-		<th  width=10%>Task</th>
-		<th width=30%>Description</th>
-		<th width=10%>Spent Hours</th>
-	</tr>
+<table id="myTable" class="tablesorter">
+	<thead> <tr class="iterationtr">
+		<th >Date</th>
+		<th >Project</th>
+		<th >Iteration</th>
+		<th >Story</th>
+		<th >Task</th>
+		<th >Description</th>
+		<th >Spent Hours</th>
+	</tr></thead> 
+		<tbody> 
 	<% @tasks = Task.find(:all,:conditions=>{:acceptor=>@user}) %>
 		<% @tasks.each do |t| %>
 		<% @stories = Story.find(:all,:conditions=>{:id=>t.story_id}) %>
@@ -51,56 +51,64 @@
 				<% end %>
 			<% end %>
 		<% end %>
-
+	<tbody> 
 </table>
-<hr/>
 	<table border = "1px" width = 100% bgcolor = #D3D8D8>
 		<tr>
 			<td width = 90% >Total Spent Hours </td>
 			<td  align=center><%= @total_time %></td>
 		</tr>
 	</table>
-<br/>
+<br>
+<hr/>
 <font color = #FF8900 > <big> Daily Time Sheet </big > </font>
 <% @st1 = @start %>
-<table border="1">
+<table id="myTable1" class="tablesorter">
+<thead>
 <tr>
 	<th>Dates</th>
 	<th>Spent Hours</th>
-</tr>
-<% @total_time = 0 %>
-<% @log_time = 0 %>
-<% @tasks = Task.find(:all,:conditions => {:acceptor => @user})%>
-<% @total_days = @end.to_date - @start.to_date %>
-<% for i in 0..@total_days.to_i %>
-<tr >
-	<td >
-	
-				
-		
-				<%= @st1%> (<%= @st1.to_date.strftime("%A")%>)
-				
-				<% @st1 = @st1.to_date + 1.day %>
-	</td>
-	<td>
-	
-				
-				
-				<% @tasks.each do |task| %>
-					<% task.logs.each do |log| %>
-						<% if @start.to_date == log.report_date %>
-						  <% @log_time = @log_time + log.spent_hours %>
-						<% end %>
-					<% end %>
-				<% end %>
-				<%= @log_time %><% @total_time = @total_time + @log_time %>
-				<% @start =  @start.to_date + 1.day %>
-			
-	</td>
-</tr>
-<% end %>
+</tr></thead>
+<tbody> 
+		<% @total_time = 0 %>
+		<%@total = 0%>
+		<% @tasks = Task.find(:all,:conditions => {:acceptor => @user})%>
+		<% @total_days = @end.to_date - @start.to_date %>
+		<% for i in 0..@total_days.to_i %>
+			<tr >
+				<td >
+						
+							<%= @st1%> (<%= @st1.to_date.strftime("%A")%>)
+							<% @st1 = @st1.to_date + 1.day %>
+						
+				</td>
+				<td>	
+					<% @log_time = 0 %>
+							<% @tasks.each do |task| %>
+								<% task.logs.each do |log| %>
+									<% if @start.to_date == log.report_date %>
+										<% @log_time = @log_time + log.spent_hours %>
+									<% end %>
+								<% end %>
+							<% end %>
+							<%= @log_time %>
+							<%@total += @log_time%><% @total_time = @total_time + @log_time %>
+							<% @start =  @start.to_date + 1.day %>	
+				</td>
+			</tr>
+			<%end%>
+</tbody> 
 </table>
+	<table border = "1px" width = 100% bgcolor = #D3D8D8>
+		<tr>
+			<td width = 64% >Total Spent Hours </td><td  align=center><span id="totalcount"><%=@total%></span></td>
+		</tr>
+	</table>
+	<br>
 
+<style>
+#totalcount{color: #0071BC;}
+</style>
 <hr/>
 <b>Actual hours by project </b>
 <table bgcolor= #D3D8D8 >
@@ -141,7 +149,14 @@
 
 </body>
 </html>
-
+<script>
+$(document).ready(function() 
+    { 
+        $("#myTable").tablesorter( {sortList: [[0,0], [1,0]]} ); 
+        $("#myTable1").tablesorter( {sortList: [[0,0], [1,0]]} ); 
+    } 
+);  
+</script>
 
 <p>
   Download:
