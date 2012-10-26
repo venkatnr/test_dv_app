@@ -46,9 +46,9 @@ else
 	if @task.save
 		@user = User.current.mail
 		@user_id = User.current.id
-		@task_id = @story.tasks.find(params[:id])
+		@task_id = @task.id
 		#@task_id = @story.tasks.find(params[:id]) 
-		#@task.update_attribute("acceptor",User.current.lastname)
+		@task.update_attribute("acceptor",User.current.lastname)
 		TaskMailer.task_creation(@user,@user_id,@task_id).deliver
 	end
        #render :action => "show"
