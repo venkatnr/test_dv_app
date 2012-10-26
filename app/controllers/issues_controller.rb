@@ -23,7 +23,7 @@ class IssuesController < ApplicationController
   before_filter :find_issues, :only => [:bulk_edit, :bulk_update, :destroy]
   before_filter :find_project, :only => [:new, :create]
   before_filter :authorize, :except => [:index,:current_iteration,:parking_garage,:completed ]
-  before_filter :user_access, :only => [:create]
+ # before_filter :user_access, :only => [:create]
   before_filter :find_optional_project, :only => [:index]
   before_filter :check_for_default_issue_status, :only => [:new, :create]
   before_filter :build_new_issue_from_params, :only => [:new, :create]
