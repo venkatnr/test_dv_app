@@ -7,7 +7,7 @@ production:
   database: redmine_development
   host: localhost
   username: root
-  password: 
+  password: tiger
   encoding: utf8
 
 development:

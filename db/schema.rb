@@ -69,6 +69,7 @@ ActiveRecord::Schema.define(:version => 20121018132257) do
     t.boolean "onthefly_register",               :default => false, :null => false
     t.boolean "tls",                             :default => false, :null => false
     t.string  "filter"
+    t.integer "timeout"
   end
 
   add_index "auth_sources", ["id", "type"], :name => "index_auth_sources_on_id_and_type"
@@ -351,28 +352,6 @@ ActiveRecord::Schema.define(:version => 20121018132257) do
   add_index "journals", ["journalized_id"], :name => "index_journals_on_journalized_id"
   add_index "journals", ["user_id"], :name => "index_journals_on_user_id"
 
-  create_table "kb_articles", :force => true do |t|
-    t.integer  "category_id",                   :null => false
-    t.string   "title",                         :null => false
-    t.text     "summary"
-    t.text     "content"
-    t.datetime "created_at",                    :null => false
-    t.datetime "updated_at",                    :null => false
-    t.integer  "author_id",      :default => 0, :null => false
-    t.integer  "comments_count"
-    t.integer  "project_id",     :default => 0
-  end
-
-  create_table "kb_categories", :force => true do |t|
-    t.string   "title",       :null => false
-    t.text     "description"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
-    t.integer  "parent_id"
-    t.integer  "lft"
-    t.integer  "rgt"
-  end
-
   create_table "logs", :force => true do |t|
     t.date     "report_date"
     t.float    "spent_hours"
@@ -500,14 +479,6 @@ ActiveRecord::Schema.define(:version => 20121018132257) do
   add_index "queries", ["project_id"], :name => "index_queries_on_project_id"
   add_index "queries", ["user_id"], :name => "index_queries_on_user_id"
 
-  create_table "ratings", :force => true do |t|
-    t.integer "rated_id"
-    t.string  "rated_type"
-    t.decimal "rating",     :precision => 10, :scale => 0
-  end
-
-  add_index "ratings", ["rated_type", "rated_id"], :name => "index_ratings_on_rated_type_and_rated_id"
-
   create_table "repositories", :force => true do |t|
     t.integer "project_id",                  :default => 0,     :null => false
     t.string  "url",                         :default => "",    :null => false
@@ -562,23 +533,6 @@ ActiveRecord::Schema.define(:version => 20121018132257) do
 
   add_index "stories", ["iteration_id"], :name => "index_stories_on_iteration_id"
 
-  create_table "taggings", :force => true do |t|
-    t.integer  "tag_id"
-    t.integer  "taggable_id"
-    t.string   "taggable_type"
-    t.datetime "created_at"
-    t.integer  "tagger_id"
-    t.string   "tagger_type"
-    t.string   "context",       :limit => 128
-  end
-
-  add_index "taggings", ["tag_id"], :name => "index_taggings_on_tag_id"
-  add_index "taggings", ["taggable_id", "taggable_type", "context"], :name => "index_taggings_on_taggable_id_and_taggable_type_and_context"
-
-  create_table "tags", :force => true do |t|
-    t.string "name"
-  end
-
   create_table "tasks", :force => true do |t|
     t.string   "name"
     t.string   "task_type"
@@ -601,9 +555,9 @@ ActiveRecord::Schema.define(:version => 20121018132257) do
     t.integer  "project_id",  :null => false
     t.integer  "user_id",     :null => false
     t.integer  "issue_id"
-    t.float    "hours"
+    t.float    "hours",       :null => false
     t.string   "comments"
-    t.integer  "activity_id"
+    t.integer  "activity_id", :null => false
     t.date     "spent_on",    :null => false
     t.integer  "tyear",       :null => false
     t.integer  "tmonth",      :null => false
@@ -643,6 +597,7 @@ ActiveRecord::Schema.define(:version => 20121018132257) do
     t.boolean "is_in_chlog",                 :default => false, :null => false
     t.integer "position",                    :default => 1
     t.boolean "is_in_roadmap",               :default => true,  :null => false
+    t.integer "fields_bits",                 :default => 0
   end
 
   create_table "user_preferences", :force => true do |t|
@@ -724,17 +679,6 @@ ActiveRecord::Schema.define(:version => 20121018132257) do
 
   add_index "versions", ["project_id"], :name => "versions_project_id"
   add_index "versions", ["sharing"], :name => "index_versions_on_sharing"
-
-  create_table "viewings", :force => true do |t|
-    t.integer  "viewer_id"
-    t.integer  "viewed_id"
-    t.string   "viewed_type"
-    t.string   "ip",          :limit => 24
-    t.datetime "created_at"
-  end
-
-  add_index "viewings", ["viewed_type", "viewed_id"], :name => "index_viewings_on_viewed_type_and_viewed_id"
-  add_index "viewings", ["viewer_id"], :name => "index_viewings_on_viewer_id"
 
   create_table "watchers", :force => true do |t|
     t.string  "watchable_type", :default => "", :null => false
