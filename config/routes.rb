@@ -177,13 +177,17 @@ resources :effortreports
 		 
 		collection do
 		    put :update_attribute_on_the_spot	
+		    get :access_iteration
 		  end
 		member do
 		 get 'deleteiteration'
 		end
 		
 		resources :stories do
+			collection do
+			 get 'access_stories'
 			 get 'deletestory'
+			end
 			resources :attendance
 			
 		  resources :tasks do

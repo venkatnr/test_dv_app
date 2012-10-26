@@ -16,6 +16,15 @@ def new
 
 end
 
+
+ def access_stories
+	if  !User.current.admin
+	flash[:notice] = "Not an authorised user to create an iteration"
+	redirect_to home_path
+	end
+ end
+
+
 def create
 	@project = Project.find(params[:project_id])
 	 @iteration = Iteration.find(params[:iteration_id])

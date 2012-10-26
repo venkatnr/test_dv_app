@@ -111,7 +111,7 @@
 		
 			<td =>
 	<%if User.current.admin? %>
-		<%= link_to 'Destroy',  deleteiteration_project_iteration_path(@project.id, st.id), :confirm => 'Are you sure?', :method => :delete  %>
+		<%= link_to 'Destroy',  deleteiteration_project_iteration_path(@project.id, @iteration.id,st.id), :confirm => 'Are you sure?', :method => :delete  %>
 	<% else %>
 	<% end %>
 			</td>

@@ -1,5 +1,6 @@
 class IterationsController < ApplicationController
 #before_filter :test, :except => [:index, :new, :edit, :show]
+before_filter :access_iteration, :only => [:create]
 can_edit_on_the_spot
 def test
 @project = Project.find(params[:project_id])	
@@ -36,6 +37,15 @@ def edit
     @project = Project.find(params[:project_id])
     @iteration = @project.iteration.find(params[:id])
 end
+
+
+ def access_iteration
+	if  !User.current.admin
+	flash[:notice] = "Not an authorised user to create an iteration"
+	redirect_to home_path
+	end
+ end
+
 
 def create
 	  @project = Project.find(params[:project_id])
@@ -108,9 +118,11 @@ end
 def deleteiteration
 	#raise params.inspect
     @project_id = params[:project_id]
-    @iteration_id = params[:id]
-   @iteration = Iteration.find(@iteration_id)
-	 @iteration.destroy
-   redirect_to project_path(@project_id)
+    @it_id = params[:id]
+    @story_id = params[:format]
+   @story = Story.find(@story_id)
+	
+   @story.destroy
+   redirect_to project_iteration_path(@project_id,)
 end
 end

@@ -24,9 +24,9 @@
     </tr>
   <tr>
 	  
-    <td id="tdleft"><%= f.label :End_date %></td>
+    <td id="tdleft"><%#= f.label :End_date %></td>
    
-   <td> <%= f.text_field :end_date, :id => :popupDatepicker1 %></td>
+   <td> <%= f.hidden_field :end_date, :id => :popupDatepicker1 %></td>
   </tr>
   <tr>
     <td id="tdleft"><%= f.label :Status %></td>
