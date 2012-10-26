@@ -49,12 +49,7 @@ else
 		@task_id = @task.id
 		#@task_id = @story.tasks.find(params[:id]) 
 		@task.update_attribute("acceptor",User.current.lastname)
-<<<<<<< HEAD
-                
-       #TaskMailer.task_creation("bhanuteja6@gmail.com","bhanu",1).deliver
-=======
 		TaskMailer.task_creation(@user,@user_id,@task_id).deliver
->>>>>>> ed206b8fc94ab0c44f3142f08eb2d5a766c6616a
 	end
        #render :action => "show"
          	redirect_to project_iteration_story_path(@projectid.id, @iterationid.id, @storyid.id)

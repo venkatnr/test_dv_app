@@ -69,7 +69,6 @@ ActiveRecord::Schema.define(:version => 20121018132257) do
     t.boolean "onthefly_register",               :default => false, :null => false
     t.boolean "tls",                             :default => false, :null => false
     t.string  "filter"
-    t.integer "timeout"
   end
 
   add_index "auth_sources", ["id", "type"], :name => "index_auth_sources_on_id_and_type"
@@ -555,9 +554,9 @@ ActiveRecord::Schema.define(:version => 20121018132257) do
     t.integer  "project_id",  :null => false
     t.integer  "user_id",     :null => false
     t.integer  "issue_id"
-    t.float    "hours",       :null => false
+    t.float    "hours"
     t.string   "comments"
-    t.integer  "activity_id", :null => false
+    t.integer  "activity_id"
     t.date     "spent_on",    :null => false
     t.integer  "tyear",       :null => false
     t.integer  "tmonth",      :null => false
@@ -597,7 +596,6 @@ ActiveRecord::Schema.define(:version => 20121018132257) do
     t.boolean "is_in_chlog",                 :default => false, :null => false
     t.integer "position",                    :default => 1
     t.boolean "is_in_roadmap",               :default => true,  :null => false
-    t.integer "fields_bits",                 :default => 0
   end
 
   create_table "user_preferences", :force => true do |t|
