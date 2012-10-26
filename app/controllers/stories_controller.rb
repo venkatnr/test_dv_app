@@ -19,7 +19,7 @@ end
 
  def access_stories
 	if  !User.current.admin
-	flash[:notice] = "Not an authorised user to create an iteration"
+	flash[:notice] = "Not an authorised user to create a user story"
 	redirect_to home_path
 	end
  end
