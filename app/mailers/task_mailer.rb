@@ -1,12 +1,12 @@
 class TaskMailer < ActionMailer::Base
   default from: "redmine.logicmatter@gmail.com"
 def task_creation(usermail,iname,tid)
-@task_acceptor = usermail
-@pro_name = iname
-@task_name = tid
+@user = usermail
+@user_id = iname
+@task_id = tid
 @task = Task.find(:all , :conditions => {:id => @task_name })
 
-    mail(:to =>@task_acceptor, :subject => "Task", :from => "redmine.logicmatter@gmail.com")
+    mail(:to =>@user, :subject => "Task", :from => "redmine.logicmatter@gmail.com")
   end
 
 def task_update(usermail,tid,week)
