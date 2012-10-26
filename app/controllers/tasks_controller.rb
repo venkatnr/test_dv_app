@@ -44,10 +44,12 @@ if @task.task_type == "leave" && @task.estimated_hours > 8
  flash[:error] = "Leave is only 8 hrs to log per day"
 else
 	if @task.save
-		@tid = @task.id
-		@task.update_attribute("acceptor",User.current.lastname)
-                
-       TaskMailer.task_creation("bhanuteja6@gmail.com","bhanu",1).deliver
+		@user = User.current.mail
+		@user_id = User.current.id
+		@task_id = @story.tasks.find(params[:id])
+		#@task_id = @story.tasks.find(params[:id]) 
+		#@task.update_attribute("acceptor",User.current.lastname)
+		TaskMailer.task_creation(@user,@user_id,@task_id).deliver
 	end
        #render :action => "show"
          	redirect_to project_iteration_story_path(@projectid.id, @iterationid.id, @storyid.id)
