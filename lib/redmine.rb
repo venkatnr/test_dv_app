@@ -158,6 +158,7 @@ Redmine::MenuManager.map :top_menu do |menu|
  
   menu.push :administration, { :controller => 'admin', :action => 'index' }, :if => Proc.new { User.current.admin? }, :last => true
  #menu.push :HR , :new_absence_path, :caption => "HR"
+  menu.push :weekly_mail, {:controller => 'my',:action => 'week_mail'}, :if => Proc.new { User.current.logged? }
  # menu.push :help, Redmine::Info.help_url, :last => true
  menu.push :Reports, {:controller => 'effortreports' , :action => 'index'}
 end
