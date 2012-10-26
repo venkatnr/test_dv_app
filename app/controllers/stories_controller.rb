@@ -1,6 +1,6 @@
 class StoriesController < ApplicationController
 
-before_filter :access_stories, :only => [:create]
+before_filter :access_stories, :only => [:create, :edit]
 def index
 @project = Project.find(params[:project_id])
   @iteration = Iteration.find(params[:iteration_id])
@@ -18,9 +18,11 @@ end
 
 
  def access_stories
+  @project = Project.find(params[:project_id])
+  @iteration = Iteration.find(params[:iteration_id])
 	if  !User.current.admin
-	flash[:notice] = "Not an authorised user to create a user story"
-	redirect_to home_path
+	flash[:notice] = "Not an authorised user to create/modify/delete a user story"
+	redirect_to project_iteration_path( @project.id, @iteration.id )
 	end
  end
 
